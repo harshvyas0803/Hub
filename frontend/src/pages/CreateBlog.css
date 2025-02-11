@@ -1,0 +1,171 @@
+/* Overall page styling */
+.create-blog-page {
+    margin-top: 160px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    padding-bottom: 2rem;
+    width: 800px;
+    margin-left: -150px;
+ 
+  }
+  
+  /* Container styling for the blog creation form */
+  .create-blog-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: #fff;
+    padding: 2rem 3rem;
+    border-radius: 50px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading styling */
+  .create-blog-container h1 {
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem; /* Increased font size for impact */
+    font-weight: 700; /* Bold font for emphasis */
+    text-align: center;
+    /* Apply a gradient effect to the text */
+    background-image: linear-gradient(45deg, #3b26b394, #9c59ca);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* Optional letter spacing and text shadow for a refined look */
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  /* Form layout */
+  .create-blog-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Title input styling */
+  .create-blog-title {
+    font-size: 1.5rem;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+  }
+  
+  /* Category select styling */
+  .create-blog-category {
+    font-size: 1rem;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 40px;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  /* Content textarea styling */
+  .create-blog-content {
+    min-height: 300px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    font-size: 1rem;
+    border-radius: 30px;
+  }
+
+/* Customized scrollbar for textarea (WebKit Browsers) */
+.create-blog-content::-webkit-scrollbar {
+    width: 100px;
+  }
+  
+  .create-blog-content::-webkit-scrollbar-track {
+   
+    border-radius: 100px;
+  }
+  
+  /* Thumb styling with smooth transitions */
+  .create-blog-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #3b26b3, #9c59ca);
+    border-radius: 100px;
+ 
+    transition: background 0.3s ease, border-radius 0.3s ease;
+  }
+  
+  /* Hover effect for the scrollbar thumb */
+  .create-blog-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #2a1689, #8830b8);
+    border-radius: 15px;
+  }
+  
+  /* Firefox scrollbar styling remains unchanged */
+  .create-blog-content {
+    scrollbar-width:20px;
+    scrollbar-track-color: #9c59ca;
+    scrollbar-color: #9c59ca #f1f1f1;
+  }
+  
+  
+  
+  /* Tags input styling */
+  .create-blog-tags {
+    font-size: 1rem;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Submit button styling */
+  .create-blog-submit {
+    align-self: flex-end;
+    padding: 0.75rem 1.5rem;
+    background-color: #3c3c3c;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+     
+    transition: background-color 0.5s ease, border-radius 0.5s ease;
+  }
+  
+  .create-blog-submit:hover {
+    background-color: #555;
+    border-radius: 30px;
+  }
+
+  
+  
+/* Styles for the Access Denied card */
+.login-cardCB {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
+}
+
+.login-cardCB h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.login-cardCB p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.clickable {
+  color: #3b26b387;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.clickable:hover {
+  color: #9C59CA;
+}

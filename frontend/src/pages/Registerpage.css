@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Signika", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f3f3f3;
+}
+
+/* Main container styles (similar to the login container) */
+.register-container {
+  margin-left: -100px;
+  height: 400px;
+  width: 400px;
+  border-radius: 30px;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  /* Glowing border animation */
+  animation: glowing-border 1.5s ease-in-out infinite;
+  margin-top: -120px;
+}
+
+/* Glowing border animation */
+@keyframes glowing-border {
+  0% {
+    box-shadow: 0 0 5px #3C26B3, 0 0 10px #3C26B3, 0 0 15px #3C26B3, 0 0 20px #3C26B3;
+  }
+  50% {
+    box-shadow: 0 0 10px #9C59CA, 0 0 20px #9C59CA, 0 0 30px #9C59CA, 0 0 40px #9C59CA;
+  }
+  100% {
+    box-shadow: 0 0 5px #3C26B3, 0 0 10px #3C26B3, 0 0 15px #3C26B3, 0 0 20px #3C26B3;
+  }
+}
+
+/* Heading styling */
+.register-heading {
+  font-size: 28px;
+  color: #3C26B3;
+  background-image: linear-gradient(45deg, #3C26B3 6%, #9C59CA 46%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+/* Form styling */
+.register-form {
+  width: 100%;
+}
+
+/* Input field styling (consistent with login inputs) */
+.reg-input {
+  width: 110%;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  font-size: 16px;
+  outline: none;
+  color: #333;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.reg-input:focus {
+  border-color: #3C26B3;
+  box-shadow: 0 4px 8px rgba(60, 38, 179, 0.3), 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Submit button styling */
+.reg-submit-btn {
+  padding: 8px 28px;
+  background-color: #3C26B3;
+  color: white;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.reg-submit-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Login prompt and link styling */
+.login-prompt {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #3C26B3;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.login-prompt:hover {
+  color: #9C59CA;
+  text-decoration: underline;
+}
+
+.login-link {
+  color: #3C26B3;
+  margin-left: 2px;
+}
+
+/* Responsive Styles */
+@media (max-width: 780px) {
+  .register-container {
+    height: 350px;
+  }
+}
+
+@media (max-width: 475px) {
+  .register-container {
+    width: 300px;
+    height: 350px;
+    margin-left: -30px;
+  }
+  .reg-submit-btn {
+    /* Adjust button placement if needed on small screens */
+    margin-top: 20px;
+  }
+}
+
+
+

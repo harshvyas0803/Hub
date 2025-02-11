@@ -1,0 +1,153 @@
+/* Overall Home Page Styling */
+.home-page {
+  background-color: #f5f5f5;
+ 
+   padding: 0 2rem;
+  width: 800px;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+ position: fixed;
+ position: relative;
+height:100vh;
+overflow-y: auto;
+margin-right: 290px;
+margin-top: 90px;
+ width: 95vw;
+ overflow-y:auto;
+
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 800px; /* Adjust based on your layout */
+  margin-top: 20px; /* Adjust to ensure spacing */
+}
+
+
+/* Heading Styling */
+.home-heading {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0rem;
+  background-image: linear-gradient(45deg, #3b26b394, #9c59ca);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-right: 30px;
+}
+
+
+
+.post-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;  
+  padding-top: 2rem; /* Adds some space to prevent overlap */
+  min-height: 200px;
+}
+
+
+
+
+
+/* Individual Post Card Styling */
+.post-card {
+  background-color: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 30px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Header Section of the Card */
+.post-card-header {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.post-author {
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 0.3rem;
+}
+
+/* Content Section of the Card */
+.post-card-content {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+ 
+ .home-page {
+  scrollbar-width:thin; /* Firefox */
+  scrollbar-color: #9c59ca #e5e5e5; /* Thumb & Track */
+  
+}
+
+/* Custom Scrollbar for WebKit Browsers */
+*::-webkit-scrollbar {
+  width: 12px; 
+}
+
+/* Scrollbar Track */
+*::-webkit-scrollbar-track {
+  background: #e5e5e5;  
+  border-radius: 20px;
+}
+
+/* Scrollbar Thumb */
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #3b26b3, #9c59ca); /* Matches heading */
+  border-radius: 100px;
+  transition: background 0.3s ease-in-out;
+}
+
+/* Scrollbar Hover Effect */
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #2a1689, #8830b8);
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.post-category {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;          /* Adds some padding around the text */
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;                      /* White text */
+  background: linear-gradient(45deg, #1c166f, #bfb2b0);
+  border-radius: 10px;              /* Rounded corners for a badge effect */
+  box-shadow: 0 0 6px rgba(63, 16, 113, 0.94);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 0.5rem;            /* Optional spacing if needed */
+}
+
+.post-category:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgb(49, 27, 116);
+}

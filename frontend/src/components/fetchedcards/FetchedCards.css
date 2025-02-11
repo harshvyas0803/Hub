@@ -1,0 +1,76 @@
+/* FetchedCards.css */
+
+.post-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.action-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid black; /* Black border */
+  padding: 8px;
+  border-radius: 50%;
+  background-color: transparent; /* No background */
+  color: black; /* Icon color */
+  transition: all 0.3s ease;
+}
+
+.action-icon:hover {
+  background-color: rgba(238, 130, 238, 0.1); /* Slight violet tint on hover */
+}
+
+.action-icon.active {
+  background-color: violet;
+  color: white;
+  border-color: violet;
+}
+
+/* For comment icon when comments exist */
+.action-icon.has-comments {
+  background-color: violet;
+  color: white;
+  border-color: violet;
+}
+
+.comment-section {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black; /* Black border */
+  padding: 12px;
+  border-radius: 8px;
+  background-color: white; /* Ensure no background */
+}
+
+.comment-input {
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.comment-btn {
+  padding: 8px 16px;
+  background-color: violet;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  max-width: 120px;
+}
+
+.comments-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.comments-list li {
+  margin-top: 8px;
+  font-size: 0.9em;
+  color: #555;
+}

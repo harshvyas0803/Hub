@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&family=Coming+Soon&family=Quicksand:wght@300..700&family=Signika:wght@300..700&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+
+
+*{
+    font-family: Signika;
+}
+/* For Chrome, Safari and Opera */
+::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* For IE, Edge and Firefox */
+  html {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+  

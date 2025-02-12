@@ -3,11 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../../assets/Hubpurple.png';
 import { useBlog } from "../../context/BlogContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import RightSidebar from '../rightsidebar/RightSidebar';
 
 const Navbar = () => {
   const { user, setUser } = useBlog();
   const navigate = useNavigate();
   const [token, setToken] = useState('');
+  const [sidebarVisible, setSidebarVisible] = useState(false);
 
   // Retrieve token and username from localStorage on component mount.
   useEffect(() => {
@@ -29,7 +33,12 @@ const Navbar = () => {
     localStorage.removeItem('username'); // remove the username as well
     setUser(null);
     setToken('');
-    navigate('/')
+    navigate('/');
+  };
+
+  // Toggle sidebar visibility when the menu icon is clicked.
+  const toggleSidebar = () => {
+    setSidebarVisible(!sidebarVisible);
   };
 
   return (
@@ -44,18 +53,28 @@ const Navbar = () => {
         <nav className="options">
           <Link to="/" className="option">Home</Link>
           <Link to="/createblog" className="option blog">Create new blog</Link>
-          {/* <Link to="/about" className="option">About</Link> */}
         </nav>
 
-        {token ? (
-          <>
-            <span className="welcome-text">Welcome, {user?.name}</span>
-            <button onClick={handleLogout}>Logout</button>
-          </>
-        ) : (
-          <button onClick={() => navigate('/login')}>Login</button>
-        )}
+        <div className="navbar-right">
+  {token ? (
+    <>
+      <span className="welcome-text">Welcome, {user?.name}</span>
+      <button onClick={handleLogout}>Logout</button>
+      <FontAwesomeIcon 
+        icon={faBars} 
+        onClick={toggleSidebar} 
+        className="menu-icon" 
+      />
+    </>
+  ) : (
+    <button onClick={() => navigate('/login')}>Login</button>
+  )}
+</div>
+
       </div>
+
+      {/* Conditionally render the RightSidebar when sidebarVisible is true */}
+      {sidebarVisible && <RightSidebar />}
     </header>
   );
 };

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown, faComment } from '@fortawesome/free-solid-svg-icons';
-import RightSidebar from "../rightsidebar/RightSidebar";
+// import RightSidebar from "../rightsidebar/RightSidebar";
 
 const FetchedCards = ({ posts }) => {
   const navigate = useNavigate();
@@ -138,11 +138,11 @@ const FetchedCards = ({ posts }) => {
   return (
     <div className="post-cards-container-wrapper">
       {/* Optionally show the right sidebar if the user is logged in */}
-      {isLoggedIn && (
+      {/* {isLoggedIn && (
         <div className="right-sidebar">
           <RightSidebar />
         </div>
-      )}
+      )} */}
 
       <div className={`post-cards-container ${!isLoggedIn ? 'blurred' : ''}`}>
         {posts.length > 0 ? (

@@ -187,3 +187,26 @@ button:hover {
     z-index: 1001;
   }
 }
+/* Styles for the navbar-right container */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+ /* Menu Icon styling */
+.menu-icon {
+  font-size: 1.8rem;
+  cursor: pointer;
+  /* Apply gradient text effect */
+  color: #3C26B3;
+  background-image: linear-gradient(45deg, #3C26B3 6%, #9C59CA 46%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease;
+}
+
+.menu-icon:hover {
+  transform: scale(1.1);
+}

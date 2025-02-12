@@ -48,7 +48,7 @@ const RightSidebar = () => {
 
   return (
     <div className="rightsidebar_">
-      <h3>Welcome, {user.username}</h3>
+      <h3>Good to see you</h3>
       <div className="user-details">
         <p><strong>Email:</strong> {user.email}</p>
         <p><strong>Joined:</strong> {new Date(user.createdAt).toLocaleDateString()}</p>

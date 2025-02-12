@@ -2,7 +2,7 @@
 .sidebar_ {
     position: fixed;
     left: 0;
-    top: 30px; /* Slight offset from the top */
+    top: 30px;  
     height: 80vh;
     width: 280px;
     background: linear-gradient(11deg, rgba(8, 7, 82, 0.427) 16%, rgba(255, 255, 255, 0.199) 88%);

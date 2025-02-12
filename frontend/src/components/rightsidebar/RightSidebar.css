@@ -1,0 +1,65 @@
+/* RightSidebar Container */
+.rightsidebar_ {
+  position: fixed;
+  right: 0;
+  top: 30px; /* Slight offset from the top */
+  height: 80vh;
+  width: 280px;
+  /* Reversed gradient: violet at the top, light lavender at the bottom (not pure white) */
+  background: linear-gradient(to bottom, rgba(8, 7, 82, 0.8) 16%, rgba(230, 230, 250, 0.9) 88%);
+  color: #fff;
+  padding: 20px;
+  overflow-y: auto;
+  border-radius: 20px; /* Reduced radius for a sleeker look */
+  margin-top: 80px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  margin-right: 40px;
+  backdrop-filter: blur(5px); /* Adds a subtle background blur */
+  /* Add text-shadow so white text remains visible on lighter background */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Title styling */
+.rightsidebar_ h3 {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  /* More subtle text-shadow for a modern effect */
+  text-shadow: 1px 1px 8px rgba(60, 38, 179, 0.6);
+  /* Removed neon glow animation for a sleeker look */
+}
+
+/* User details styling */
+.user-details p {
+  font-size: 1rem;
+  margin: 8px 0;
+  color: #eee;
+  line-height: 1.4;
+}
+
+/* Blog titles */
+.user-blogs {
+  margin-top: 20px;
+}
+
+.user-blog-title {
+  background: transparent;
+  border: none;
+  border-left: 4px solid rgba(255, 255, 255, 0.5);
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #fff;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user-blog-title:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

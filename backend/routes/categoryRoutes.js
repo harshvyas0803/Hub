@@ -7,7 +7,7 @@ const router = express.Router()
 router.get('/', async (req, res) => {
     try {
       const categories = await Category.find(); // Fetch categories from DB
-      console.log(categories)
+  
       res.json(categories); // Send categories to frontend
     } catch (error) {
       res.status(500).json({ message: 'Error fetching categories' });

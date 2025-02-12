@@ -6,11 +6,12 @@ const PostSchema = new mongoose.Schema(
     content: { type: String, required: true },
     category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Array of user IDs who liked
-    dislikes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Array of user IDs who disliked
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],      // Users who liked
+    dislikes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],   // Users who disliked
     comments: [
       {
         user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        username: String,
         text: { type: String, required: true },
         createdAt: { type: Date, default: Date.now },
       },

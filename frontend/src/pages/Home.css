@@ -11,7 +11,7 @@
  position: relative;
 height:100vh;
 overflow-y: auto;
-margin-right: 290px;
+margin-right: 200px;
 margin-top: 90px;
  width: 95vw;
  overflow-y:auto;
@@ -37,7 +37,7 @@ margin-top: 90px;
   -webkit-text-fill-color: transparent;
   letter-spacing: 1px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-right: 30px;
+  margin-right: 180px;
 }
 
 

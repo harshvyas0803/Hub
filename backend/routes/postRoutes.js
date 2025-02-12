@@ -3,97 +3,66 @@ import mongoose from 'mongoose';
 import Post from '../models/Post.js';
 import Category from '../models/Category.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
+import User from '../models/User.js';
+
 
 const router = express.Router();
 
-// Create Post Route
+// Create Post Route (unchanged)
 router.post('/create', authMiddleware, async (req, res) => {
   const { title, category, content, tags } = req.body;
-  const userId = req.userId; // Retrieved from authMiddleware
-
-  console.log('Received request to create post');
-  console.log('Request Body:', req.body);
-  console.log('Authenticated User ID:', userId);
-
+  const userId = req.userId;
   try {
-    // Check if user is authenticated
-    if (!userId) {
-      console.error('Error: User ID is missing');
-      return res.status(401).json({ message: 'Unauthorized: User ID is missing' });
-    }
-
-    // Validate required fields
     if (!title || !category || !content) {
-      console.error('Error: Missing required fields');
       return res.status(400).json({ message: 'Title, category, and content are required' });
     }
-
-    // Validate category ID format
     if (!mongoose.Types.ObjectId.isValid(category)) {
-      console.error('Error: Invalid category ID format');
       return res.status(400).json({ message: 'Invalid category ID' });
     }
-
-    // Find category by its ObjectId
     const categoryData = await Category.findById(category);
     if (!categoryData) {
-      console.error('Error: Category not found for id', category);
       return res.status(400).json({ message: 'Category not found' });
     }
-
-    // Create new post
     const newPost = new Post({
       title,
-      category: categoryData._id, // Use the category's ObjectId
+      category: categoryData._id,
       content,
       tags: tags ? tags.split(',').map(tag => tag.trim()) : [],
       author: userId,
     });
-
     await newPost.save();
-    console.log('Post created successfully:', newPost);
-
     res.status(201).json({ message: 'Post created successfully', post: newPost });
-
   } catch (error) {
-    console.error('Post creation error:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
 
-// Get All Posts Route
+// Get All Posts Route (with population)
 router.get('/', async (req, res) => {
-  console.log('Fetching all posts...');
   try {
     const posts = await Post.find()
-      .populate('author', 'username') // Populates author username
-      .populate('category', 'name')   // Populates category name
+      .populate('author', 'username')
+      .populate('category', 'name')
       .sort({ createdAt: -1 });
-
-    console.log('Posts fetched successfully:', posts.length, 'posts found');
     res.status(200).json(posts);
   } catch (error) {
-    console.error('Error fetching posts:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
 
 // Like a Post
+ // Like a Post
 router.post('/:postId/like', authMiddleware, async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId);
     if (!post) return res.status(404).json({ message: 'Post not found' });
-
     const userId = req.userId;
-
-    // Toggle like/dislike behavior
     if (post.likes.includes(userId)) {
       post.likes = post.likes.filter(id => id.toString() !== userId);
     } else {
       post.likes.push(userId);
-      post.dislikes = post.dislikes.filter(id => id.toString() !== userId); // Remove dislike if exists
+      post.dislikes = post.dislikes.filter(id => id.toString() !== userId);
     }
-
     await post.save();
     res.json({ likes: post.likes.length, dislikes: post.dislikes.length });
   } catch (error) {
@@ -101,22 +70,21 @@ router.post('/:postId/like', authMiddleware, async (req, res) => {
   }
 });
 
+
 // Dislike a Post
 router.post('/:postId/dislike', authMiddleware, async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId);
     if (!post) return res.status(404).json({ message: 'Post not found' });
-
     const userId = req.userId;
 
-    // Toggle dislike behavior
+    // Toggle dislike: if already disliked, remove; else add and remove any like.
     if (post.dislikes.includes(userId)) {
       post.dislikes = post.dislikes.filter(id => id.toString() !== userId);
     } else {
       post.dislikes.push(userId);
-      post.likes = post.likes.filter(id => id.toString() !== userId); // Remove like if exists
+      post.likes = post.likes.filter(id => id.toString() !== userId);
     }
-
     await post.save();
     res.json({ likes: post.likes.length, dislikes: post.dislikes.length });
   } catch (error) {
@@ -133,27 +101,20 @@ router.post('/:postId/comment', authMiddleware, async (req, res) => {
     const post = await Post.findById(req.params.postId);
     if (!post) return res.status(404).json({ message: 'Post not found' });
 
-    const comment = { user: req.userId, text };
+    const user = await User.findById(req.userId); // Fetch user details
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    const comment = { user: req.userId, username: user.username, text }; // Include username
     post.comments.push(comment);
-
     await post.save();
-    res.json(post.comments);
+
+    res.json(comment); // Return the comment with the username
   } catch (error) {
+    console.error("Error adding comment:", error); // Log error in console
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
 
-// Share a Post (Example: just return post URL)
-router.get('/:postId/share', async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.postId);
-    if (!post) return res.status(404).json({ message: 'Post not found' });
 
-    const postUrl = `${req.protocol}://${req.get('host')}/post/${post._id}`;
-    res.json({ message: 'Post link', url: postUrl });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-});
 
 export default router;

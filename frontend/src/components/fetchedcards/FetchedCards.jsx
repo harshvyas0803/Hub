@@ -1,10 +1,9 @@
-// FetchedCards.js
 import React, { useState, useEffect } from "react";
 import "./FetchedCards.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faThumbsDown, faComment, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faThumbsDown, faComment, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -162,7 +161,14 @@ const FetchedCards = ({ posts, defaultExpandSingle }) => {
             return (
               <div key={post._id} className={`post-card ${isExpanded ? "expanded" : ""}`} id={post._id}>
                 <div className="post-card-header">
-                  <h3 className="post-title">{post.title}</h3>
+                  <div className="header-title-wrapper">
+                    <h3 className="post-title">{post.title}</h3>
+                    {post.author?.username === loggedInUsername && (
+                      <div className="edit-icon" onClick={() => navigate(`/updateblog/${post._id}`)}>
+                        <FontAwesomeIcon icon={faEdit} />
+                      </div>
+                    )}
+                  </div>
                   <p className="post-category">{post.category?.name}</p>
                   <p className="post-author">Posted by: {post.author?.username}</p>
                   <p className="post-date">Published on: {new Date(post.createdAt).toLocaleString()}</p>
@@ -206,32 +212,31 @@ const FetchedCards = ({ posts, defaultExpandSingle }) => {
                 </div>
 
                 {showComments[post._id] && (
-  <div className="comment-section">
-    <textarea
-      className="comment-input"
-      id={`comment-input-${post._id}`}
-      placeholder="Add a comment..."
-      rows="2"
-    ></textarea>
-    <span
-      className="comment-btn"
-      onClick={() => handleComment(
-        post._id,
-        document.getElementById(`comment-input-${post._id}`).value
-      )}
-    >
-      Comment
-    </span>
-    <ul className="comments-list">
-      {(postComments[post._id] || post.comments || []).map((comment, index) => (
-        <li key={index}>
-          <strong>{comment.username} -</strong> {comment.text}
-        </li>
-      ))}
-    </ul>
-  </div>
-)}
-
+                  <div className="comment-section">
+                    <textarea
+                      className="comment-input"
+                      id={`comment-input-${post._id}`}
+                      placeholder="Add a comment..."
+                      rows="2"
+                    ></textarea>
+                    <span
+                      className="comment-btn"
+                      onClick={() => handleComment(
+                        post._id,
+                        document.getElementById(`comment-input-${post._id}`).value
+                      )}
+                    >
+                      Comment
+                    </span>
+                    <ul className="comments-list">
+                      {(postComments[post._id] || post.comments || []).map((comment, index) => (
+                        <li key={index}>
+                          <strong>{comment.username} -</strong> {comment.text}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             );
           })
@@ -241,17 +246,6 @@ const FetchedCards = ({ posts, defaultExpandSingle }) => {
           </div>
         )}
       </div>
-
-      {!isLoggedIn && (
-        <div className="access-denied-overlay">
-          <div className="access-denied-card">
-            <h2 className="access-denied-title">Access Denied</h2>
-            <p className="access-denied-message">
-              Please <span className="clickable" onClick={() => navigate("/login")}>login</span> or <span className="clickable" onClick={() => navigate("/register")}>register</span> to see content clearly.
-            </p>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

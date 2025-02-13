@@ -1,16 +1,15 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Signika";
+  font-family: "Signika", sans-serif;
 }
 
 body {
   overflow-x: hidden;
-  background: #f5f5f5; /* Light background for better readability */
+  background: #f5f5f5;
 }
 
 /* Fixed Navbar */
@@ -20,7 +19,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   width: 80vw;
-  padding: 10px;
+  padding: 10px 20px;
   background: rgba(255, 255, 255, 0.14);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(3.5px);
@@ -32,12 +31,6 @@ body {
   margin-top: 7px;
 }
 
-.content {
-  padding-top: 90px; /* Adjust based on navbar height */
-  width: 80%;
-  margin: auto;
-}
-
 /* Logo Styling */
 .logo img {
   height: 70px;
@@ -45,13 +38,12 @@ body {
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-/* Enhanced Logo Hover Effect */
 .logo img:hover {
   transform: scale(1.1) rotate(5deg);
   filter: drop-shadow(0 0 10px #9C59CA);
 }
 
-/* Navigation Menu (Default: Visible on Large Screens) */
+/* Navigation Menu */
 .options {
   display: flex;
   font-size: 22px;
@@ -59,11 +51,9 @@ body {
   margin-right: 30px;
 }
 
-/* Nav Link Styling with Enhanced Hover Effects */
 .options .option {
   position: relative;
   display: inline-block;
-  /* Gradient text */
   color: #3C26B3;
   background-image: linear-gradient(45deg, #3C26B3 6%, #9C59CA 46%);
   background-clip: text;
@@ -72,7 +62,6 @@ body {
   transition: transform 0.3s ease, text-shadow 0.3s ease;
 }
 
-/* Animated underline pseudo-element */
 .options .option::after {
   content: "";
   position: absolute;
@@ -86,7 +75,6 @@ body {
   transition: transform 0.3s ease;
 }
 
-/* Hover Effects for Nav Links */
 .options .option:hover {
   transform: scale(1.1);
   text-shadow: 0 0 8px rgba(60, 38, 179, 0.6), 0 0 16px rgba(156, 89, 202, 0.6);
@@ -100,7 +88,6 @@ body {
 .welcome-text {
   font-size: 1.2rem;
   font-weight: bold;
-  /* Apply a gradient effect similar to the nav links */
   background: linear-gradient(45deg, #3C26B3, #9C59CA);
   background-clip: text;
   -webkit-background-clip: text;
@@ -114,18 +101,30 @@ body {
   text-shadow: 0 0 8px rgba(60, 38, 179, 0.6), 0 0 16px rgba(156, 89, 202, 0.6);
 }
 
-/* Menu Button (Hidden on Large Screens) */
-.menu-toggle {
-  display: none;
-  font-size: 28px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #3C26B3;
-  margin-right: 20px;
+/* Navbar Right */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-/* Login/Logout Button Styling */
+/* Menu Icon styling */
+.menu-icon {
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #3C26B3;
+  background-image: linear-gradient(45deg, #3C26B3 6%, #9C59CA 46%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease;
+}
+
+.menu-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Button styling for login/logout */
 button {
   font-size: 18px;
   padding: 8px 15px;
@@ -138,16 +137,24 @@ button {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Button Hover Effect */
 button:hover {
   transform: scale(1.05);
   opacity: 0.9;
 }
 
-/* Responsive Design */
+/* Responsive Design for Tablets */
 @media (max-width: 768px) {
   .Parent_navbar {
-    width: 95vw;
+    width: 100vw;
+    padding: 8px 15px;
+  }
+  .options {
+    font-size: 18px;
+    gap: 30px;
+    margin-right: 15px;
+  }
+  .logo img {
+    height: 60px;
   }
   button {
     font-size: 16px;
@@ -155,58 +162,40 @@ button:hover {
   }
 }
 
-@media (max-width: 453px) {
+/* Responsive Design for Mobile Devices (Below 473px) */
+@media (max-width: 473px) {
   .Parent_navbar {
-    display: flex;
-    flex-direction: column;
+    flex-direction: row;  
     align-items: center;
     width: 100vw;
-    background: transparent;
-    padding: 1px;
-    justify-content: center;
+    padding: 5px 10px;
+    justify-content: space-between;
   }
-
   .logo img {
-    margin-left: auto;
-    margin-right: auto;
     height: 40px;
+    margin: 0;
   }
-
   .options {
-    justify-content: center;
-    gap: 60px;
-    margin-left: 30px;
+    flex-direction: row; /* Keep options in a row */
+    gap: 10px;
+    margin: 0;
   }
-  
+  .navbar-right {
+    flex-direction: row; /* Keep right elements in a row */
+    gap: 10px;
+  }
   button {
     font-size: 14px;
     padding: 5px 10px;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 1001;
+  }
+  .menu-icon {
+    font-size: 1.5rem;
   }
 }
-/* Styles for the navbar-right container */
-.navbar-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
 
- /* Menu Icon styling */
-.menu-icon {
-  font-size: 1.8rem;
-  cursor: pointer;
-  /* Apply gradient text effect */
-  color: #3C26B3;
-  background-image: linear-gradient(45deg, #3C26B3 6%, #9C59CA 46%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: transform 0.3s ease;
-}
-
-.menu-icon:hover {
-  transform: scale(1.1);
+/* Hide welcome text below 837px */
+@media (max-width: 837px) {
+  .welcome-text {
+    display: none;
+  }
 }

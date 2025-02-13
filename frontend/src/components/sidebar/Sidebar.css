@@ -1,111 +1,174 @@
-/* Sidebar Container */
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap');
+
+/* Container for the retractable sidebar */
+.sidebar-container {
+  position: fixed;
+  left: 0;
+  top: 100px;
+  z-index: 1000;
+}
+
+/* Toggle Button Styling */
+.sidebar-toggle-btn {
+  background: linear-gradient(45deg, #3C26B3, #9C59CA);
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar-toggle-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #2a1689, #8830b8);
+}
+
+/* Toggle Icon Styling */
+.toggle-icon {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+/* Base Sidebar Styles */
 .sidebar_ {
-    position: fixed;
-    left: 0;
-    top: 30px;  
-    height: 80vh;
-    width: 280px;
-    background: linear-gradient(11deg, rgba(8, 7, 82, 0.427) 16%, rgba(255, 255, 255, 0.199) 88%);
-    color: white; /* Default text color */
-    padding: 20px;
-    overflow-y: auto; /* Enable scrolling if needed */
-    border-radius: 30px;
-    margin-top: 80px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    margin-left: 10px;
+  width: 280px;
+  height: 75vh;
+  background: linear-gradient(11deg, rgba(8, 7, 82, 0.427) 16%, rgba(255, 255, 255, 0.199) 88%);
+  color: white;
+  padding: 20px;
+  overflow-y: auto;
+  border-radius: 30px;
+  margin-top: 2px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  margin-left: 10px;
+  backdrop-filter: blur(5px);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Sidebar Heading with Neon Glow */
+.sidebar_ h3 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0 0 10px #3C26B3, 0 0 20px #9C59CA, 0 0 30px #D1C4E9;
+  animation: neonGlow 1.8s infinite alternate;
+}
+
+@keyframes neonGlow {
+  0% {
+    text-shadow: 0 0 5px #3C26B3, 0 0 10px #9C59CA, 0 0 15px #D1C4E9;
   }
-  
-  /* Global Body Styling */
-  body {
-    background: #000;
-    margin: 0;
-    padding: 0;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
-  
-  /* Categories List Container */
-  .categories-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 30px;
-  }
-  .sidebar_ h3 {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #fff;
+  100% {
     text-shadow: 0 0 10px #3C26B3, 0 0 20px #9C59CA, 0 0 30px #D1C4E9;
-    animation: neonGlow 1.8s infinite alternate;
   }
-  
-  @keyframes neonGlow {
-    0% {
-      text-shadow: 0 0 5px #3C26B3, 0 0 10px #9C59CA, 0 0 15px #D1C4E9;
-    }
-    100% {
-      text-shadow: 0 0 10px #3C26B3, 0 0 20px #9C59CA, 0 0 30px #D1C4E9;
-    }
-  }
-  
-  /* Category styled as a <p> tag with gradient text */
-  .category-button {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 25px;
-    padding: 12px 20px;
-    margin: 0; /* Remove default <p> margin */
-    font-size: 1rem;
-    font-weight: 500;
-    text-align: center;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    color: #3C26B3; /* Fallback color */
-    background-image: linear-gradient(45deg, #3C26B3 6%, #9C59CA 46%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    width: 200px;
-  }
-  
-  /* Hover state: dark background with white text */
-  .category-button:hover {
-    background: rgba(0, 0, 0, 0.603); /* Dark background */
-    border-color: rgba(0, 0, 0, 0.6);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    
-    /* Remove gradient text styling for clear white text */
-    background-image: none;
-    color: #fff;
-    -webkit-background-clip: initial;
-    -webkit-text-fill-color: #fff;
-  }
-  .npa_S{
-    color: #000;
+}
 
-  }
+/* Categories List Container */
+.categories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+}
 
-  /* Sidebar.css */
-
-/* Base styling for category buttons */
+/* Category Button - Base Styling */
 .category-button {
   padding: 8px 12px;
   cursor: pointer;
   margin-bottom: 5px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  text-align: center;
+  
+  /* Gradient text style */
+  color: #3C26B3;
+  background-image: linear-gradient(45deg, #3C26B3 6%, #9C59CA 46%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  width: 200px;
 }
 
-/* Hover effect for category buttons */
+/* Hover state for category buttons */
 .category-button:hover {
-  background-color: rgba(59, 38, 179, 0.695);
+  background: rgba(0, 0, 0, 0.603);
+  border-color: rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-image: none;
+  color: #fff;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: #fff;
 }
 
 /* Active category styling */
 .category-button.active {
   background-color: rgba(84, 72, 170, 0.3);
-  font-weight:900;
-  color: #000000;
+  font-weight: 900;
+  color: #000;
+}
+
+/* Responsive Adjustments */
+
+/* For tablets (max-width: 768px) */
+@media (max-width: 768px) {
+  .sidebar_ {
+    width: 220px;
+    padding: 15px;
+  }
+  
+  .sidebar_ h3 {
+    font-size: 1.8rem;
+  }
+  
+  .categories-list {
+    gap: 10px;
+  }
+  
+  .category-button {
+    width: 180px;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+}
+
+/* For mobile devices (max-width: 480px) */
+@media (max-width: 480px) {
+  /* On mobile, we let the sidebar be full-width and placed at the top */
+  .sidebar_ {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    border-radius: 0;
+    margin-top: 10px;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+  
+  .sidebar_ h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .categories-list {
+    gap: 8px;
+    margin-top: 10px;
+  }
+  
+  .category-button {
+    width: 100%;
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .npa_S {
+    color: #000;
+  }
 }

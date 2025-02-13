@@ -5,9 +5,6 @@ import CreateBlog from './pages/CreateBlog'
 import Loginpage from './pages/Loginpage';
 import Registerpage from './pages/Registerpage'
 import BlogDetail from './pages/BlogDetail';
- 
-
- 
 import 'react-toastify/dist/ReactToastify.css';
 
 

@@ -1,5 +1,11 @@
+/* Base Styles */
+.post-cards-container-wrapper {
+  padding: 20px;
 
-/* Container for posts */
+  margin-left: 30px;
+  padding-left: 20px;
+}
+
 .post-cards-container {
   display: flex;
   flex-direction: column;
@@ -7,7 +13,7 @@
   padding-top: 2px;
 }
 
-/* Post Card */
+/* Post Card Styles */
 .post-card {
   border: 1px solid #ccc;
   padding: 20px;
@@ -15,7 +21,8 @@
   border-radius: 12px;
   background: #fff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 600px;
+  width: 100%;
+  max-width: 900px;
   overflow: hidden;
   position: relative;
 }
@@ -25,32 +32,57 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Header */
+/* Header Styles */
 .post-card-header {
   margin-bottom: 12px;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.header-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .post-title {
-  font-size: 1.3em;
-  font-weight: bold;
+  font-size: 1.8rem;
+  font-weight: 600;
   color: #333;
-  margin: 0 0 8px 0;
+  margin: 0;
+}
+
+/* Edit icon with no extra borders/background */
+.edit-icon {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  color: #3C26B3;
+  transition: color 0.3s ease;
+}
+
+.edit-icon:hover {
+  color: violet;
 }
 
 .post-category {
   font-size: 0.9em;
   color: #666;
   font-style: italic;
+  margin-top: 5px;
 }
 
 .post-author,
 .post-date {
   font-size: 0.85em;
   color: #888;
+  margin-top: 3px;
 }
 
-/* Content */
- .post-card-content {
+/* Content Styles */
+.post-card-content {
   position: relative;
   max-height: 100px; /* Limit content height */
   overflow: hidden;
@@ -62,8 +94,8 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 40px; /* Controls the blur gradient height */
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  height: 40px; /* Blur gradient height */
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
   pointer-events: none;
 }
 
@@ -72,9 +104,8 @@
 }
 
 .post-card.expanded .post-card-content::after {
-  display: none; /* Remove blur effect when expanded */
+  display: none;
 }
-
 
 /* Read More Button */
 .read-more-btn {
@@ -100,11 +131,11 @@
   justify-content: space-around;
   align-items: center;
   margin-top: 16px;
-  border-top: 1px solid #eee;
   padding-top: 12px;
+  border-top: 1px solid #eee;
 }
 
-/* Action Icons: Border only by default */
+/* Action Icon Styles */
 .action-icon {
   display: flex;
   align-items: center;
@@ -128,6 +159,7 @@
   color: white;
   border-color: violet;
 }
+
 /* Comment Section */
 .comment-section {
   margin-top: 20px;
@@ -148,52 +180,12 @@
 
 .comment-input:focus {
   outline: none;
-  border-color: rgb(218, 130, 238);
+  border-color: violet;
   box-shadow: 0 0 0 2px rgba(238, 130, 238, 0.1);
 }
 
 .comment-input::placeholder {
   color: #a0a0a0;
-}
-
-.comment-btn {
-  display: inline-block;
-  padding: 8px 20px;
-  background-color: rgb(209, 130, 238);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.comment-btn:hover {
-  background-color: #b88fd8;
-}
-
-.comments-list {
-  list-style: none;
-  padding: 0;
-  margin-top: 16px;
-}
-
-.comments-list li {
-  padding: 12px;
-  margin: 8px 0;
-  background-color: #f8f8f8;
-  border-radius: 6px;
-  font-size: 0.9em;
-  color: #444;
-  line-height: 1.4;
-}
-
-.comments-list li:not(:last-child) {
-  margin-bottom: 12px;
-}
-.comment-input:focus {
-  outline: none;
-  border-color: violet;
 }
 
 .comment-btn {
@@ -211,11 +203,10 @@
 }
 
 .comment-btn:hover {
-  background-color: rgb(197, 130, 238);
+  background-color: violet;
   color: white;
 }
 
-/* When a comment is submitted, always show the filled style */
 .comment-btn.active {
   background-color: violet;
   color: white;
@@ -239,129 +230,104 @@
 }
 
 /* Confetti Effect */
-.confetti {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  background-color: rgb(163, 33, 163);
-  border-radius: 50%;
-  animation: confetti 1.5s ease-out;
-}
-
 .confetti-piece {
   border-radius: 2px;
   pointer-events: none;
   z-index: 1000;
 }
 
-
-
-@keyframes confetti {
-  0% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(150px) scale(1.5);
-  }
-  100% {
-    transform: translateY(300px) scale(1);
-    opacity: 0;
-  }
-}
-
-/* Access Denied Card Styles */
-.access-denied-card {
-  background-color: #fff;
-  border: 2px solid violet;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  max-width: 500px;
-  margin: 40px auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.access-denied-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-}
-
-.access-denied-title {
-  font-size: 1.8em;
-  color: violet;
-  margin-bottom: 12px;
-  font-weight: bold;
-}
-
-.access-denied-message {
-  font-size: 1em;
-  color: #555;
-  margin-bottom: 20px;
-}
-
-.access-denied-actions {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-}
-
-.access-denied-btn {
-  background-color: transparent;
-  color: violet;
-  border: 2px solid violet;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
-  font-weight: 500;
-}
-
-.access-denied-btn:hover {
-  background-color: violet;
-  color: white;
-}
-
-/* Add these styles to your FetchedCards.css */
-.posts-list {
-  transition: filter 0.3s ease;
-}
-
-.posts-list.blurred {
+/* Blurred posts container */
+.blurred {
   filter: blur(5px);
   pointer-events: none;
   user-select: none;
 }
 
-.access-denied-overlay {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+/* ------------------------- */
+/* Responsive Adjustments */
+/* ------------------------- */
+
+/* For screens up to 1024px */
+@media (max-width: 1024px) {
+  .post-card {
+    padding: 16px;
+    margin: 8px 0;
+    max-width: 90%;
+  }
+  .post-title {
+    font-size: 1.6rem;
+  }
+  .read-more-btn {
+    padding: 6px 12px;
+    font-size: 0.85em;
+  }
+  .action-icon {
+    padding: 8px;
+    font-size: 1em;
+  }
 }
 
- 
-.access-denied-card h2 {
-  color: #6a1b9a; /* Purple color */
-  margin-bottom: 1rem;
+/* For screens up to 768px */
+@media (max-width: 768px) {
+  .post-cards-container-wrapper {
+    padding: 10px;
+  }
+  .post-card {
+    padding: 14px;
+    margin: 6px 0;
+    max-width: 100%;
+  }
+  .post-title {
+    font-size: 1.4rem;
+  }
+  .read-more-btn {
+    padding: 6px 10px;
+    font-size: 0.8em;
+  }
+  .action-icon {
+    padding: 6px;
+    font-size: 0.95em;
+  }
+  .comment-input {
+    padding: 10px;
+    font-size: 0.85em;
+  }
+  .comment-btn {
+    padding: 6px 12px;
+    font-size: 0.85em;
+  }
 }
 
-.clickable {
-  color: #6a1b9a;
-  cursor: pointer;
-  text-decoration: underline;
-  margin: 0 0.3rem;
+/* For screens up to 480px */
+@media (max-width: 480px) {
+  .post-cards-container-wrapper {
+    padding: 5px;
+  }
+  .post-card {
+    padding: 10px;
+    margin: 4px 0;
+  }
+  .post-title {
+    font-size: 1.2rem;
+  }
+  .read-more-btn {
+    padding: 4px 8px;
+    font-size: 0.75em;
+  }
+  .action-icon {
+    padding: 4px;
+    font-size: 0.85em;
+  }
+  .comment-input {
+    padding: 8px;
+    font-size: 0.8em;
+  }
+  .comment-btn {
+    padding: 4px 10px;
+    font-size: 0.8em;
+  }
+  .comments-list li {
+    font-size: 0.8em;
+    padding: 6px;
+  }
 }
-
-.clickable:hover {
-  color: #4a148c;
-}
-

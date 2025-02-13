@@ -17,7 +17,7 @@ const Navbar = () => {
   useEffect(() => {
     const storedToken = localStorage.getItem('authToken');
     const storedUsername = localStorage.getItem('username');
-    console.log('Stored username:', storedUsername); // Should log the correct username
+    console.log('Stored username:', storedUsername);
 
     if (storedToken) {
       setToken(storedToken);
@@ -30,7 +30,7 @@ const Navbar = () => {
   // Handle user logout
   const handleLogout = () => {
     localStorage.removeItem('authToken');
-    localStorage.removeItem('username'); // remove the username as well
+    localStorage.removeItem('username');
     setUser(null);
     setToken('');
     navigate('/');
@@ -41,10 +41,15 @@ const Navbar = () => {
     setSidebarVisible(!sidebarVisible);
   };
 
+  // When logo is clicked, also hide sidebar if open.
+  const handleLogoClick = () => {
+    setSidebarVisible(false);
+  };
+
   return (
     <header>
       <div className="Parent_navbar">
-        <Link to="/">
+        <Link to="/" onClick={handleLogoClick}>
           <div className="logo">
             <img src={logo} alt="Logo" />
           </div>
@@ -52,28 +57,26 @@ const Navbar = () => {
 
         <nav className="options">
           <Link to="/" className="option">Home</Link>
-          <Link to="/createblog" className="option blog">Create new blog</Link>
+          <Link to="/createblog" className="option blog">Create a blog</Link>
         </nav>
 
         <div className="navbar-right">
-  {token ? (
-    <>
-      <span className="welcome-text">Welcome, {user?.name}</span>
-      <button onClick={handleLogout}>Logout</button>
-      <FontAwesomeIcon 
-        icon={faBars} 
-        onClick={toggleSidebar} 
-        className="menu-icon" 
-      />
-    </>
-  ) : (
-    <button onClick={() => navigate('/login')}>Login</button>
-  )}
-</div>
-
+          {token ? (
+            <>
+              <span className="welcome-text">Welcome, {user?.name}</span>
+              <button onClick={handleLogout}>Logout</button>
+              <FontAwesomeIcon 
+                icon={faBars} 
+                onClick={toggleSidebar} 
+                className="menu-icon" 
+              />
+            </>
+          ) : (
+            <button onClick={() => navigate('/login')}>Login</button>
+          )}
+        </div>
       </div>
 
-      {/* Conditionally render the RightSidebar when sidebarVisible is true */}
       {sidebarVisible && <RightSidebar />}
     </header>
   );

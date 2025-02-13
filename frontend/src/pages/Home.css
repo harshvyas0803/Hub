@@ -1,6 +1,6 @@
 /* Overall Home Page Styling */
 .home-page {
-   padding: 0 2rem;
+   padding: 0 1rem;
   width: 800px;
   display: flex;
   flex-direction: column; 
@@ -9,17 +9,19 @@
  position: relative;
 height:100vh;
 overflow-y: auto;
-margin-right: 200px;
 margin-top: 0px;
  width: 95vw;
  overflow-y:auto;
+ background:rgb(255, 0, 0);
  
 }
 
 .content-wrapper {
   width: 90%;
   max-width: 800px; /* Adjust based on your layout */
-   /* Adjust to ensure spacing */
+ padding-top: 20px;
+ 
+   
 }
 
 
@@ -35,7 +37,8 @@ margin-top: 0px;
   letter-spacing: 1px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-right: 180px;
-padding-bottom: 30px;
+padding-bottom: 3px;
+padding-top: 15px;
 }
 
 
@@ -144,4 +147,9 @@ html {
 .post-category:hover {
   transform: scale(1.05);
   box-shadow: 0 0 12px rgb(49, 27, 116);
+}
+
+
+@media (max-width: 800px) {
+ 
 }

@@ -1,4 +1,5 @@
-/* RightSidebar Container */
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap');
+
 .rightsidebar_ {
   position: fixed;
   right: 0;
@@ -6,7 +7,7 @@
   height: 80vh;
   width: 280px;
   /* Reversed gradient: violet at the top, light lavender at the bottom (not pure white) */
-  background: linear-gradient(to bottom, rgba(8, 7, 82, 0.586) 16%, rgba(230, 230, 250, 0.9) 88%);
+  background: linear-gradient(to bottom, rgba(60, 58, 153, 0.476) 16%, rgba(230, 230, 250, 0.9) 88%);
   color: #fff;
   padding: 20px;
   overflow-y: auto;
@@ -29,7 +30,6 @@
   color: #fff;
   /* More subtle text-shadow for a modern effect */
   text-shadow: 1px 1px 8px rgba(60, 38, 179, 0.6);
-  /* Removed neon glow animation for a sleeker look */
 }
 
 /* User details styling */
@@ -64,71 +64,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-
-.rightsidebar_ h4{
-  font-size:2rem;
-  margin-top: 1rem;
-}
-
-/* Animated Gradient Text Effect for Sidebar Elements */
-.rightsidebar_ h3,.rightsidebar_ h4, 
-.user-details p,
-.user-blog-title {
-  /* New gradient: using deep violet (#3C26B3) and lighter violet (#9C59CA) */
-  background: linear-gradient(
-    to right,
-    #3C26B3 20%,
-    #000000 40%,
-    #9C59CA 60%,
-    #3C26B3 80%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% auto;
-  animation: textShine 5s ease-in-out infinite alternate;
-}
-
-/* Keyframes for the text shine animation */
-@keyframes textShine {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
-}
-
-/* Optional: Adjust font styles if needed */
-.rightsidebar_ h3 {
-  font-size: 1.8rem;
-  text-align: center;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.user-details p {
-  font-size: 1rem;
-  margin: 8px 0;
-  line-height: 1.4;
-}
-
-.user-blog-title {
-  padding: 10px;
-  margin: 5px 0;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.user-blog-title:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateX(5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-/* Animated Gradient Text Effect for Sidebar Elements */
+/* Additional Animated Gradient Text Effect for Sidebar Elements */
 .rightsidebar_ h3,
 .user-details p,
 .user-blog-title {
@@ -200,4 +136,37 @@
 
 .modal-content button:hover {
   background: darkviolet;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .rightsidebar_ {
+    width: 240px;
+    height: 70vh;
+    padding: 15px;
+    margin-right: 15px;
+  }
+  .rightsidebar_ h3 {
+    font-size: 1.5rem;
+  }
+  .user-details p,
+  .user-blog-title {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rightsidebar_ {
+    width: 200px;
+    height: 500px;
+    padding: 10px;
+    margin-right: 10px;
+  }
+  .rightsidebar_ h3 {
+    font-size: 1.3rem;
+  }
+  .user-details p,
+  .user-blog-title {
+    font-size: 0.8rem;
+  }
 }

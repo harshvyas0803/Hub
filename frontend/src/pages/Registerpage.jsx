@@ -5,15 +5,74 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Registerpage.css';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Registerpage = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail]       = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
+  // Function to validate input fields
+  const validateInputs = () => {
+    const errors = {};
+
+    if (!username.trim()) {
+      errors.username = "Username is required.";
+    }
+
+    if (!email.trim()) {
+      errors.email = "Email is required.";
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        errors.email = "Please enter a valid email address.";
+      }
+    }
+
+    if (!password.trim()) {
+      errors.password = "Password is required.";
+    } else {
+      if (password.length < 8) {
+        errors.password = "Password must be at least 8 characters long.";
+      }
+      if (!/[A-Z]/.test(password)) {
+        errors.password = "Password must contain at least one uppercase letter.";
+      }
+      if (!/[a-z]/.test(password)) {
+        errors.password = "Password must contain at least one lowercase letter.";
+      }
+      if (!/[0-9]/.test(password)) {
+        errors.password = "Password must contain at least one number.";
+      }
+      if (!/[@$!%*?&]/.test(password)) {
+        errors.password = "Password must contain at least one special character (@, $, !, %, *, ?, &).";
+      }
+    }
+
+    return errors;
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    
+    const errors = validateInputs();
+    if (Object.keys(errors).length > 0) {
+      Object.values(errors).forEach((errMsg) => {
+        toast.error(errMsg, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      });
+      return;
+    }
+    
     try {
       const response = await axios.post('http://localhost:2005/api/user/register', { username, email, password });
       const token = response.data.token;
@@ -55,7 +114,6 @@ const Registerpage = () => {
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
             className="reg-input"
           />
           <input
@@ -63,17 +121,23 @@ const Registerpage = () => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
             className="reg-input"
           />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="reg-input"
-          />
+           <div className="password-input-wrapper">
+  <input
+    type={showPassword ? "text" : "password"}
+    placeholder="Password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    className="reg-input"
+  />
+  <FontAwesomeIcon
+    icon={showPassword ? faEyeSlash : faEye}
+    className="password-toggle-icon"
+    onClick={() => setShowPassword(!showPassword)}
+  />
+</div>
+
           <button type="submit" className="reg-submit-btn">Register</button>
         </form>
         <p className="login-prompt">

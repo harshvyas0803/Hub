@@ -62,11 +62,14 @@ body {
 /* Form styling */
 .register-form {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Input field styling (consistent with login inputs) */
+/* Input field styling */
 .reg-input {
-  width: 110%;
+  width: 120%;
   padding: 14px 18px;
   margin-bottom: 12px;
   border: 2px solid #ddd;
@@ -136,10 +139,29 @@ body {
     margin-left: -30px;
   }
   .reg-submit-btn {
-    /* Adjust button placement if needed on small screens */
     margin-top: 20px;
   }
 }
 
+/* Additional styling for password toggle icon */
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
+/* Ensure the input has extra right padding so the icon doesn't overlap */
+.password-input-wrapper .reg-input {
+  padding-right: 50px;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  right: 15px;
+  bottom: 30px;
+  cursor: pointer;
+  color: #3C26B3;
+  font-size: 0.9rem;
+  
+}
 

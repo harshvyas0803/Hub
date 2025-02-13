@@ -80,7 +80,7 @@
 .read-more-btn {
   display: inline-block;
   padding: 8px 16px;
-  background: violet;
+  background: rgb(189, 130, 238);
   color: white;
   font-size: 0.9em;
   border: none;
@@ -148,7 +148,7 @@
 
 .comment-input:focus {
   outline: none;
-  border-color: violet;
+  border-color: rgb(218, 130, 238);
   box-shadow: 0 0 0 2px rgba(238, 130, 238, 0.1);
 }
 
@@ -159,7 +159,7 @@
 .comment-btn {
   display: inline-block;
   padding: 8px 20px;
-  background-color: violet;
+  background-color: rgb(209, 130, 238);
   color: white;
   border: none;
   border-radius: 6px;
@@ -169,7 +169,7 @@
 }
 
 .comment-btn:hover {
-  background-color: #d88fd8;
+  background-color: #b88fd8;
 }
 
 .comments-list {
@@ -211,7 +211,7 @@
 }
 
 .comment-btn:hover {
-  background-color: violet;
+  background-color: rgb(197, 130, 238);
   color: white;
 }
 

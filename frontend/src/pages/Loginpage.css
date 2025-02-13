@@ -15,18 +15,7 @@ body {
     background: #f3f3f3;
 }
 
-/* Style the heading */
-h2 {
-    color: #3C26B3;
-    background-image: linear-gradient(45deg, #3C26B3 6%, #9C59CA 46%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-
-/* Main container styles */
+/* Main container styles (similar to the login container) */
 .login-container {
     margin-left: -100px;
     height: 400px;
@@ -43,7 +32,6 @@ h2 {
     /* Glowing border animation */
     animation: glowing-border 1.5s ease-in-out infinite;
     margin-top: -120px;
-     
 }
 
 /* Glowing border animation */
@@ -59,7 +47,27 @@ h2 {
     }
 }
 
-/* Input field styles */
+/* Heading styling */
+.login-heading {
+    font-size: 28px;
+    color: #3C26B3;
+    background-image: linear-gradient(45deg, #3C26B3 6%, #9C59CA 46%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+/* Form styling */
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Input field styling */
 .input-fieldl {
     width: 130%;
     padding: 14px 18px;
@@ -69,26 +77,21 @@ h2 {
     font-size: 16px;
     outline: none;
     color: #333;
-    display: flex;
     transition: all 0.3s ease;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1);
 }
- 
 
-/* Focus state of input fields */
 .input-fieldl:focus {
     border-color: #3C26B3;
     box-shadow: 0 4px 8px rgba(60, 38, 179, 0.3), 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Button Container - Centers the Button */
- 
-/* Button styles */
+/* Button styling */
 .submit-btn {
     padding: 8px 28px;
     background-color: #3C26B3;
     color: white;
-    margin-top: 20PX;
+    margin-top: 20px;
     font-size: 18px;
     font-weight: bold;
     border-radius: 25px;
@@ -97,13 +100,12 @@ h2 {
     transition: transform 0.3s ease-in-out;
 }
 
-/* Button Hover Effect */
 .submit-btn:hover {
     transform: scale(1.1);
     opacity: 0.9;
 }
 
-
+/* Register text styling */
 .register-txt {
     margin-top: 15px;
     font-size: 14px;
@@ -111,8 +113,6 @@ h2 {
     text-align: center;
     cursor: pointer;
     transition: color 0.3s ease-in-out;
-
-    
 }
 
 .register-txt:hover {
@@ -120,35 +120,47 @@ h2 {
     text-decoration: underline;
 }
 
- .register-btn{
+.register-btn {
     color: #3C26B3;
     margin-left: 2px;
- }
+}
 
 /* Responsive Styles */
 @media (max-width: 780px) {
-  .login-container{
+  .login-container {
     height: 350px;
   }
 }
 
-/* max code= 475 k niche */
 @media (max-width: 475px) {
-    .login-container {
-       
-        width: 100vw;
-     
-       height: 350px;
-       width: 300px;
- 
-  margin-left: -30px;
-    }
-     .submit-btn{
-        margin-top: 420px;
-        margin-left: 100px;
-     }
-
+  .login-container {
+    width: 300px;
+    height: 350px;
+    margin-left: -30px;
+  }
+  .submit-btn {
+    margin-top: 420px;
+    margin-left: 100px;
+  }
 }
 
+/* Additional styling for password toggle icon */
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 130%;
+}
 
- 
+/* Add extra right padding so the toggle icon doesn't overlap */
+.password-input-wrapper .input-fieldl {
+  padding-right: 50px;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+  color: #3C26B3;
+  font-size: 1.2rem;
+}

@@ -45,6 +45,8 @@ router.post('/register', async (req, res) => {
 
 // Login Route
   
+ // Login Route in authRoutes.js
+ // Login Route in authRoutes.js
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -61,18 +63,21 @@ router.post('/login', async (req, res) => {
 
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1d' });
 
-    // Include email and createdAt in response
+    // Convert user document to plain object to ensure timestamps are accessible
+    const userObj = user.toObject();
+
     res.status(200).json({
       message: 'Login successful',
       token,
       username: user.username,
       email: user.email,
-      createdAt: user.createdAt,  // Ensure this is included
+      createdAt: userObj.createdAt, // Now explicitly include createdAt
     });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 
 export default router;

@@ -23,9 +23,12 @@ const RightSidebar = () => {
     }
   }, []);
 
+
   // Fetch user blogs once user data is available
   useEffect(() => {
     if (user && user.authToken) {
+    
+
       const fetchUserBlogs = async () => {
         try {
           const response = await axios.get('http://localhost:2005/api/posts/', {

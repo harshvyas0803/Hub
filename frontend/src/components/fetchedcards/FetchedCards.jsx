@@ -206,31 +206,32 @@ const FetchedCards = ({ posts, defaultExpandSingle }) => {
                 </div>
 
                 {showComments[post._id] && (
-                  <div className="comment-section">
-                    <textarea
-                      className="comment-input"
-                      id={`comment-input-${post._id}`}
-                      placeholder="Add a comment..."
-                      rows="2"
-                    ></textarea>
-                    <span
-                      className="comment-btn"
-                      onClick={() => handleComment(
-                        post._id,
-                        document.getElementById(`comment-input-${post._id}`).value
-                      )}
-                    >
-                      Comment
-                    </span>
-                    <ul className="comments-list">
-                      {postComments[post._id]?.map((comment, index) => (
-                        <li key={index}>
-                          <strong>{comment.username} -</strong> {comment.text}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+  <div className="comment-section">
+    <textarea
+      className="comment-input"
+      id={`comment-input-${post._id}`}
+      placeholder="Add a comment..."
+      rows="2"
+    ></textarea>
+    <span
+      className="comment-btn"
+      onClick={() => handleComment(
+        post._id,
+        document.getElementById(`comment-input-${post._id}`).value
+      )}
+    >
+      Comment
+    </span>
+    <ul className="comments-list">
+      {(postComments[post._id] || post.comments || []).map((comment, index) => (
+        <li key={index}>
+          <strong>{comment.username} -</strong> {comment.text}
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
               </div>
             );
           })

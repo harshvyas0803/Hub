@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -7,10 +5,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Loginpage.css';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Loginpage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   // Handle login on form submission
@@ -28,8 +29,9 @@ const Loginpage = () => {
     
       localStorage.setItem('authToken', token);
       localStorage.setItem('username', username);
-      localStorage.setItem('email', userEmail);  // Changed here
+      localStorage.setItem('email', userEmail);
       localStorage.setItem('createdAt', createdAt);
+      console.log(createdAt)
       
       toast.success('Login Successful!');
       setTimeout(() => navigate('/'), 2000);
@@ -39,7 +41,6 @@ const Loginpage = () => {
     }
     
   };
-  
 
   return (
     <div className="login-container">
@@ -55,18 +56,25 @@ const Loginpage = () => {
             required
             className="input-fieldl"
           />
-          <input
-            type="password"
-            placeholder="Password here"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="input-fieldl"
-          />
+          <div className="password-input-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password here"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="input-fieldl"
+            />
+            <FontAwesomeIcon
+              icon={showPassword ? faEyeSlash : faEye}
+              className="password-toggle-icon"
+              onClick={() => setShowPassword(!showPassword)}
+            />
+          </div>
           <button type="submit" className="submit-btn">Login</button>
         </form>
         <p className="register-txt">
-          Not a member? 
+          Not a member?{' '}
           <Link to="/register" className="register-btn">Register</Link>
         </p>
       </div>

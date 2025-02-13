@@ -5,8 +5,8 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from '../components/sidebar/Sidebar';
-import { useBlog } from '../context/BlogContext'; // Adjust this if needed
+ 
+import { useBlog } from '../context/BlogContext';  
 
 const CreateBlog = () => {
   const { user } = useBlog(); // Get the logged-in user from context
@@ -99,7 +99,7 @@ const CreateBlog = () => {
   return (
     <div className="create-blog-page">
       <Navbar />
-      <Sidebar />
+    
       {user ? (
         <div className="create-blog-container">
           <h1>Create a Blog Post</h1>

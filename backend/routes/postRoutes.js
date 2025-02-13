@@ -50,7 +50,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Like a Post
+
  // Like a Post
 router.post('/:postId/like', authMiddleware, async (req, res) => {
   try {
@@ -115,6 +115,57 @@ router.post('/:postId/comment', authMiddleware, async (req, res) => {
   }
 });
 
+
+// Delete a Post Route
+
+// Delete a Post Route
+router.delete('/:postId', authMiddleware, async (req, res) => {
+  try {
+    // Find the post by ID
+    const post = await Post.findById(req.params.postId);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+    
+    // Check if the logged-in user is the author of the post
+    if (post.author.toString() !== req.userId) {
+      return res.status(403).json({ message: 'You are not authorized to delete this post' });
+    }
+    
+    // Delete the post using deleteOne()
+    await post.deleteOne();
+    res.status(200).json({ message: 'Post deleted successfully' });
+  } catch (error) {
+    console.error("Error in DELETE /api/posts/:postId", error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+
+ // routes/posts.js
+router.delete('/:postId', authMiddleware, async (req, res) => {
+  try {
+    // Find the post by ID
+    const post = await Post.findById(req.params.postId);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+    
+    // Check if the logged-in user is the author of the post
+    // Ensure that post.author is stored as an ObjectId or a string
+    if (post.author.toString() !== req.userId) {
+      return res.status(403).json({ message: 'You are not authorized to delete this post' });
+    }
+    
+    // Delete the post
+    await post.remove();
+    res.status(200).json({ message: 'Post deleted successfully' });
+  } catch (error) {
+    // Log error details to help with debugging
+    console.error("Error in DELETE /api/posts/:postId", error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
 
 
 export default router;

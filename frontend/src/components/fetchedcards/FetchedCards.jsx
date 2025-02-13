@@ -3,8 +3,9 @@ import "./FetchedCards.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faThumbsDown, faComment } from '@fortawesome/free-solid-svg-icons';
-// import RightSidebar from "../rightsidebar/RightSidebar";
+import { faThumbsUp, faThumbsDown, faComment, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FetchedCards = ({ posts }) => {
   const navigate = useNavigate();
@@ -16,7 +17,6 @@ const FetchedCards = ({ posts }) => {
   const [activeIcons, setActiveIcons] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Determine login status based on authToken in localStorage.
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     setIsLoggedIn(!!token);
@@ -35,13 +35,11 @@ const FetchedCards = ({ posts }) => {
         `http://localhost:2005/api/posts/${postId}/like`,
         {},
         {
-          headers: {
-            Authorization: token ? `Bearer ${token}` : ""
-          }
+          headers: { Authorization: token ? `Bearer ${token}` : "" }
         }
       );
       setPostLikes((prev) => ({ ...prev, [postId]: response.data.likes }));
-      if(response.data.dislikes !== undefined) {
+      if (response.data.dislikes !== undefined) {
         setPostDislikes((prev) => ({ ...prev, [postId]: response.data.dislikes }));
       }
       triggerConfetti(postId);
@@ -59,13 +57,11 @@ const FetchedCards = ({ posts }) => {
         `http://localhost:2005/api/posts/${postId}/dislike`,
         {},
         {
-          headers: {
-            Authorization: token ? `Bearer ${token}` : ""
-          }
+          headers: { Authorization: token ? `Bearer ${token}` : "" }
         }
       );
       setPostDislikes((prev) => ({ ...prev, [postId]: response.data.dislikes }));
-      if(response.data.likes !== undefined) {
+      if (response.data.likes !== undefined) {
         setPostLikes((prev) => ({ ...prev, [postId]: response.data.likes }));
       }
     } catch (error) {
@@ -76,15 +72,12 @@ const FetchedCards = ({ posts }) => {
   const handleComment = async (postId, commentText) => {
     const token = localStorage.getItem("authToken");
     if (!commentText.trim()) return;
-    
     try {
       const response = await axios.post(
         `http://localhost:2005/api/posts/${postId}/comment`,
         { text: commentText },
         {
-          headers: {
-            Authorization: token ? `Bearer ${token}` : ""
-          }
+          headers: { Authorization: token ? `Bearer ${token}` : "" }
         }
       );
       setPostComments((prev) => ({
@@ -101,11 +94,28 @@ const FetchedCards = ({ posts }) => {
     setActiveIcons(prev => ({ ...prev, [postId]: prev[postId] === 'comment' ? null : 'comment' }));
   };
 
+  // Delete a post (only for posts authored by the logged-in user)
+  const handleDelete = async (postId) => {
+    const token = localStorage.getItem("authToken");
+    try {
+      await axios.delete(`http://localhost:2005/api/posts/${postId}`, {
+        headers: { Authorization: token ? `Bearer ${token}` : "" }
+      });
+      toast.success("Post deleted successfully!");
+      // Reload the page after a short delay so the toast can be seen
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      toast.error("Error deleting post!");
+    }
+  };
+
   const triggerConfetti = (postId) => {
     const container = document.getElementById(postId);
     if (!container) return;
     const confettiCount = 80;
-
     for (let i = 0; i < confettiCount; i++) {
       const confettiPiece = document.createElement('div');
       confettiPiece.className = 'confetti-piece';
@@ -116,34 +126,26 @@ const FetchedCards = ({ posts }) => {
       confettiPiece.style.top = '-20px';
       confettiPiece.style.left = Math.random() * 100 + '%';
       confettiPiece.style.opacity = Math.random();
-
       container.appendChild(confettiPiece);
-
       const delay = Math.random() * 500;
       const duration = 1500 + Math.random() * 1000;
-
       setTimeout(() => {
         confettiPiece.style.transition = `transform ${duration}ms linear, opacity ${duration}ms linear`;
         const drift = (Math.random() - 0.5) * 100;
         confettiPiece.style.transform = `translate(${drift}px, ${container.clientHeight + 100}px) rotate(${Math.random() * 360}deg)`;
         confettiPiece.style.opacity = 0;
       }, delay);
-
       setTimeout(() => {
         confettiPiece.remove();
       }, delay + duration);
     }
   };
 
+  const loggedInUsername = localStorage.getItem('username');
+
   return (
     <div className="post-cards-container-wrapper">
-      {/* Optionally show the right sidebar if the user is logged in */}
-      {/* {isLoggedIn && (
-        <div className="right-sidebar">
-          <RightSidebar />
-        </div>
-      )} */}
-
+      <ToastContainer />
       <div className={`post-cards-container ${!isLoggedIn ? 'blurred' : ''}`}>
         {posts.length > 0 ? (
           posts.map((post) => {
@@ -151,7 +153,6 @@ const FetchedCards = ({ posts }) => {
             const isLiked = activeIcons[post._id] === 'like';
             const isDisliked = activeIcons[post._id] === 'dislike';
             const isCommentActive = activeIcons[post._id] === 'comment';
-
             return (
               <div key={post._id} className={`post-card ${isExpanded ? "expanded" : ""}`} id={post._id}>
                 <div className="post-card-header">
@@ -191,6 +192,11 @@ const FetchedCards = ({ posts }) => {
                     <FontAwesomeIcon icon={faComment} />
                     <span>Comment</span>
                   </div>
+                  {post.author?.username === loggedInUsername && (
+                    <div className="action-icon" onClick={() => handleDelete(post._id)}>
+                      <FontAwesomeIcon icon={faTrash} />
+                    </div>
+                  )}
                 </div>
 
                 {showComments[post._id] && (
@@ -229,7 +235,6 @@ const FetchedCards = ({ posts }) => {
         )}
       </div>
 
-      {/* Overlay with access message when not logged in */}
       {!isLoggedIn && (
         <div className="access-denied-overlay">
           <div className="access-denied-card">

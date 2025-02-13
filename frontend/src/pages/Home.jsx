@@ -1,3 +1,4 @@
+// Home.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/navbar/Navbar";
@@ -8,6 +9,7 @@ import "./Home.css";
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -15,7 +17,6 @@ const Home = () => {
         const response = await axios.get('http://localhost:2005/api/posts', {
           headers: { Authorization: `Bearer ${token}` },
         });
-        // Make sure to update your posts state here!
         setPosts(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -24,18 +25,24 @@ const Home = () => {
   
     fetchPosts();
   }, []);
-  
+
+  // Filter posts based on selected category
+  const filteredPosts = selectedCategory 
+    ? posts.filter(post => post.category?.name === selectedCategory)
+    : posts;
 
   return (
     <div className="home-page">
-    <Navbar />
-    <Sidebar onCategorySelect={setSelectedCategory} />
-    <div className="content-wrapper">
-      <h2 className="home-heading">Recent Posts</h2>
-      <FetchedCards posts={posts} />
-  
+      <Navbar />
+      <Sidebar 
+        onCategorySelect={setSelectedCategory} 
+        selectedCategory={selectedCategory} 
+      />
+      <div className="content-wrapper">
+        <h2 className="home-heading">Recent Posts</h2>
+        <FetchedCards posts={filteredPosts} />
+      </div>
     </div>
-  </div>
   );
 };
 

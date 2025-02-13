@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import CreateBlog from './pages/CreateBlog'
 import Loginpage from './pages/Loginpage';
 import Registerpage from './pages/Registerpage'
+import BlogDetails from './components/blogdetails/BlogDetails';
 
  
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,7 +19,8 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/createblog' element={<CreateBlog />} />
-          {/* <Route path='/about' element={<About />} /> */}
+          <Route path="/blog/:id" element={<BlogDetails />} />
+
 
            {/* login route */}
           <Route path='/login' element={<Loginpage />} />
@@ -33,12 +35,6 @@ const App = () => {
 export default App;
 /*
 
-Home Page (showing recent posts)
 Blog Post Page (individual post details)
-Login/Register Page (for users to log in and create accounts)
-Create Post Page (for authenticated users to write blog posts)
-Profile Page (user details and posts they've written)
-Edit Post Page (to edit existing posts)
-
 
 */

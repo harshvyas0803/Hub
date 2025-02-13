@@ -48,7 +48,7 @@
 .user-blog-title {
   background: transparent;
   border: none;
-  border-left: 4px solid rgba(255, 255, 255, 0.5);
+  border-left: 4px solid rgba(0, 0, 0, 0.5);
   padding: 10px;
   margin: 5px 0;
   font-size: 0.95rem;
@@ -64,8 +64,14 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+
+.rightsidebar_ h4{
+  font-size:2rem;
+  margin-top: 1rem;
+}
+
 /* Animated Gradient Text Effect for Sidebar Elements */
-.rightsidebar_ h3,
+.rightsidebar_ h3,.rightsidebar_ h4, 
 .user-details p,
 .user-blog-title {
   /* New gradient: using deep violet (#3C26B3) and lighter violet (#9C59CA) */
@@ -150,4 +156,48 @@
   100% {
     background-position: 100% 50%;
   }
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* Modal Content */
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal Content Heading */
+.modal-content h2 {
+  margin-bottom: 15px;
+}
+
+/* Close Button Styling */
+.modal-content button {
+  background: violet;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.modal-content button:hover {
+  background: darkviolet;
 }

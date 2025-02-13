@@ -1,10 +1,13 @@
+// RightSidebar.js
 import React, { useState, useEffect } from 'react';
 import './RightSidebar.css';
 import axios from 'axios';
 
+
 const RightSidebar = () => {
   const [user, setUser] = useState(null);
   const [userBlogs, setUserBlogs] = useState([]);
+  const [selectedBlog, setSelectedBlog] = useState(null); // New state for modal
 
   // Fetch user data from localStorage once the component mounts
   useEffect(() => {
@@ -13,7 +16,6 @@ const RightSidebar = () => {
     const createdAt = localStorage.getItem('createdAt');
     const authToken = localStorage.getItem('authToken');
 
-    // Check if the user data exists in localStorage
     if (username && email && createdAt && authToken) {
       setUser({ username, email, createdAt, authToken });
     } else {
@@ -29,14 +31,28 @@ const RightSidebar = () => {
           const response = await axios.get('http://localhost:2005/api/posts/', {
             headers: { Authorization: `Bearer ${user.authToken}` },
           });
-          setUserBlogs(response.data);
+          // Filter posts to only include those where the author matches the logged-in user
+          const userPosts = response.data.filter(
+            post => post.author && post.author.username === user.username
+          );
+          setUserBlogs(userPosts);
         } catch (error) {
           console.error('Error fetching user blogs:', error);
         }
       };
       fetchUserBlogs();
     }
-  }, [user]); // Re-run this effect when user state changes
+  }, [user]);
+
+  // Handler when a blog title is clicked
+  const handleBlogClick = (blog) => {
+    setSelectedBlog(blog);
+  };
+
+  // Handler to close the modal
+  const closeModal = () => {
+    setSelectedBlog(null);
+  };
 
   if (!user) {
     return (
@@ -58,7 +74,11 @@ const RightSidebar = () => {
       <div className="user-blogs">
         {userBlogs.length > 0 ? (
           userBlogs.map((blog) => (
-            <p key={blog._id} className="user-blog-title">
+            <p
+              key={blog._id}
+              className="user-blog-title"
+              onClick={() => handleBlogClick(blog)}
+            >
               {blog.title}
             </p>
           ))
@@ -66,6 +86,24 @@ const RightSidebar = () => {
           <p>No blogs yet</p>
         )}
       </div>
+
+      {/* Modal to display the selected blog's details */}
+      {selectedBlog && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2>{selectedBlog.title}</h2>
+            {/* You can add more details as needed */}
+            <p>{selectedBlog.content}</p>
+            <p>
+              <strong>Category:</strong> {selectedBlog.category?.name}
+            </p>
+            <p>
+              <strong>Published on:</strong> {new Date(selectedBlog.createdAt).toLocaleString()}
+            </p>
+            <button onClick={closeModal}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

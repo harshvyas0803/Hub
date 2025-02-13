@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './Sidebar.css';
 import axios from 'axios';
 
-const Sidebar = ({ onCategorySelect }) => {
+const Sidebar = ({ onCategorySelect, selectedCategory }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -27,11 +27,17 @@ const Sidebar = ({ onCategorySelect }) => {
     <div className="sidebar_">
       <h3>Categories</h3>
       <div className="categories-list">
+        <p 
+          className={`category-button ${selectedCategory === "" ? "active" : ""}`}
+          onClick={() => onCategorySelect("")}
+        >
+          All
+        </p>
         {categories.length > 0 ? (
           categories.map((category) => (
             <p
               key={category._id}
-              className="category-button"
+              className={`category-button ${selectedCategory === category.name ? "active" : ""}`}
               onClick={() => onCategorySelect(category.name)}
             >
               {category.name}

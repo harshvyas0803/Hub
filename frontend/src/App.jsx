@@ -4,7 +4,8 @@ import Home from './pages/Home';
 import CreateBlog from './pages/CreateBlog'
 import Loginpage from './pages/Loginpage';
 import Registerpage from './pages/Registerpage'
-import BlogDetails from './components/blogdetails/BlogDetails';
+import BlogDetail from './pages/BlogDetail';
+ 
 
  
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,7 +20,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/createblog' element={<CreateBlog />} />
-          <Route path="/blog/:id" element={<BlogDetails />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
 
 
            {/* login route */}

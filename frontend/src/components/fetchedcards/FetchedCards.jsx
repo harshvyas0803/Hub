@@ -1,3 +1,4 @@
+// FetchedCards.js
 import React, { useState, useEffect } from "react";
 import "./FetchedCards.css";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +8,7 @@ import { faThumbsUp, faThumbsDown, faComment, faTrash } from '@fortawesome/free-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const FetchedCards = ({ posts }) => {
+const FetchedCards = ({ posts, defaultExpandSingle }) => {
   const navigate = useNavigate();
   const [expandedPost, setExpandedPost] = useState(null);
   const [postLikes, setPostLikes] = useState({});
@@ -21,6 +22,13 @@ const FetchedCards = ({ posts }) => {
     const token = localStorage.getItem("authToken");
     setIsLoggedIn(!!token);
   }, []);
+
+  // Auto-expand if defaultExpandSingle is true and there is exactly one post.
+  useEffect(() => {
+    if (defaultExpandSingle && posts.length === 1) {
+      setExpandedPost(posts[0]._id);
+    }
+  }, [posts, defaultExpandSingle]);
 
   const toggleExpand = (postId) => {
     setExpandedPost(prev => (prev === postId ? null : postId));
@@ -94,7 +102,6 @@ const FetchedCards = ({ posts }) => {
     setActiveIcons(prev => ({ ...prev, [postId]: prev[postId] === 'comment' ? null : 'comment' }));
   };
 
-  // Delete a post (only for posts authored by the logged-in user)
   const handleDelete = async (postId) => {
     const token = localStorage.getItem("authToken");
     try {
@@ -102,7 +109,6 @@ const FetchedCards = ({ posts }) => {
         headers: { Authorization: token ? `Bearer ${token}` : "" }
       });
       toast.success("Post deleted successfully!");
-      // Reload the page after a short delay so the toast can be seen
       setTimeout(() => {
         window.location.reload();
       }, 2000);

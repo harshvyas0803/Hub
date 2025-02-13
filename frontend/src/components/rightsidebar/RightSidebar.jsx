@@ -2,14 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import './RightSidebar.css';
 import axios from 'axios';
-
+import { useNavigate } from "react-router-dom";
 
 const RightSidebar = () => {
   const [user, setUser] = useState(null);
   const [userBlogs, setUserBlogs] = useState([]);
-  const [selectedBlog, setSelectedBlog] = useState(null); // New state for modal
+  const navigate = useNavigate();
 
-  // Fetch user data from localStorage once the component mounts
+  // Fetch user data from localStorage when the component mounts
   useEffect(() => {
     const username = localStorage.getItem('username');
     const email = localStorage.getItem('email');
@@ -23,7 +23,7 @@ const RightSidebar = () => {
     }
   }, []);
 
-  // Fetch user blogs once the user data is available
+  // Fetch user blogs once user data is available
   useEffect(() => {
     if (user && user.authToken) {
       const fetchUserBlogs = async () => {
@@ -31,7 +31,7 @@ const RightSidebar = () => {
           const response = await axios.get('http://localhost:2005/api/posts/', {
             headers: { Authorization: `Bearer ${user.authToken}` },
           });
-          // Filter posts to only include those where the author matches the logged-in user
+          // Filter posts to include only those authored by the logged-in user
           const userPosts = response.data.filter(
             post => post.author && post.author.username === user.username
           );
@@ -43,16 +43,6 @@ const RightSidebar = () => {
       fetchUserBlogs();
     }
   }, [user]);
-
-  // Handler when a blog title is clicked
-  const handleBlogClick = (blog) => {
-    setSelectedBlog(blog);
-  };
-
-  // Handler to close the modal
-  const closeModal = () => {
-    setSelectedBlog(null);
-  };
 
   if (!user) {
     return (
@@ -77,7 +67,8 @@ const RightSidebar = () => {
             <p
               key={blog._id}
               className="user-blog-title"
-              onClick={() => handleBlogClick(blog)}
+              onClick={() => navigate(`/blog/${blog._id}`)}
+              style={{ cursor: "pointer" }}
             >
               {blog.title}
             </p>
@@ -86,24 +77,6 @@ const RightSidebar = () => {
           <p>No blogs yet</p>
         )}
       </div>
-
-      {/* Modal to display the selected blog's details */}
-      {selectedBlog && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>{selectedBlog.title}</h2>
-            {/* You can add more details as needed */}
-            <p>{selectedBlog.content}</p>
-            <p>
-              <strong>Category:</strong> {selectedBlog.category?.name}
-            </p>
-            <p>
-              <strong>Published on:</strong> {new Date(selectedBlog.createdAt).toLocaleString()}
-            </p>
-            <button onClick={closeModal}>Close</button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

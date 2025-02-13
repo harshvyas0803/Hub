@@ -142,6 +142,26 @@ router.delete('/:postId', authMiddleware, async (req, res) => {
 });
 
 
+
+// In your posts route file (e.g., routes/posts.js)
+router.get('/:postId', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId)
+      .populate('author', 'username')
+      .populate('category', 'name');
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+
+
+
+
  // routes/posts.js
 router.delete('/:postId', authMiddleware, async (req, res) => {
   try {

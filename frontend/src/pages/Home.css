@@ -36,7 +36,7 @@ margin-top: 0px;
   -webkit-text-fill-color: transparent;
   letter-spacing: 1px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-right: 180px;
+  
 padding-bottom: 3px;
 padding-top: 15px;
 }
@@ -150,6 +150,9 @@ html {
 }
 
 
-@media (max-width: 800px) {
+@media (max-width: 650px) {
+  .home-heading{
+    margin-left: 54px;
+  }
  
 }

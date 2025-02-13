@@ -32,7 +32,7 @@ const Sidebar = ({ onCategorySelect, selectedCategory }) => {
   return (
     <div className="sidebar-container">
       <button className="sidebar-toggle-btn" onClick={toggleSidebar}>
-        {isOpen ? "Hide Categories" : "Show Categories"}
+        {isOpen ? "Hide  " : " Categories"}
         <FontAwesomeIcon
           icon={isOpen ? faChevronUp : faChevronDown}
           className="toggle-icon"
@@ -40,7 +40,7 @@ const Sidebar = ({ onCategorySelect, selectedCategory }) => {
       </button>
       {isOpen && (
         <div className="sidebar_">
-          <h3>Categories</h3>
+      
           <div className="categories-list">
             <p 
               className={`category-button ${selectedCategory === "" ? "active" : ""}`}

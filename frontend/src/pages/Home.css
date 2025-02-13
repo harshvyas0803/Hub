@@ -150,9 +150,10 @@ html {
 }
 
 
-@media (max-width: 650px) {
+@media (max-width: 800px) {
   .home-heading{
     margin-left: 54px;
+  margin-bottom: 20px;
   }
  
 }

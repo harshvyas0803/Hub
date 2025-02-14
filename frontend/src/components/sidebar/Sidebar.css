@@ -2,7 +2,7 @@
 
 /* Container for the retractable sidebar */
 .sidebar-container {
-  position: fixed;
+ position: absolute;
   left: 0;
   top: 100px;
   z-index: 1000;
@@ -19,6 +19,7 @@
   cursor: pointer;
   margin: 10px;
   transition: background 0.3s ease, transform 0.3s ease;
+
 }
 
 .sidebar-toggle-btn:hover {
@@ -102,53 +103,71 @@
 
 /* For tablets (max-width: 768px) */
 @media (max-width: 768px) {
+
+
+  .sidebar-container{
+    margin-left: -20px;
+    margin-top: 2px;
+  }
+
+
   .sidebar_ {
-    width: 220px;
+    width: 150px;
     padding: 15px;
+    background: #000;
+    border-radius: 20px;
+   
   }
    
-  
+  .sidebar-toggle-btn{
+    width: 140px;
+    height: 35px;
+    padding: 2px;
+  }
+
   .categories-list {
     gap: 10px;
   }
   
   .category-button {
-    width: 180px;
-    padding: 6px 10px;
+    width: 100px;
+    padding: 6px 1px;
     font-size: 0.9rem;
   }
 }
+@media (max-width: 420px){
 
-/* For mobile devices (max-width: 480px) */
-@media (max-width: 480px) {
-  /* On mobile, we let the sidebar be full-width and placed at the top */
+  .sidebar-container{
+    margin-left: -20px;
+    margin-top: -40px;
+     
+  }
+
+
   .sidebar_ {
-    position: relative;
-    width: 100%;
-    padding: 10px;
-    border-radius: 0;
-    margin-top: 10px;
-    box-shadow: none;
-    backdrop-filter: none;
+    width: 150px;
+    padding: 15px;
+    background: #000;
+    border-radius: 20px;
+   
   }
-  
-  .sidebar_ h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+   
+  .sidebar-toggle-btn{
+    width: 140px;
+    height: 30px;
+    padding: 2px;
   }
-  
+
   .categories-list {
-    gap: 8px;
-    margin-top: 10px;
+    gap: 10px;
   }
   
   .category-button {
-    width: 100%;
-    padding: 8px;
+    width: 100px;
+    padding: 6px 1px;
     font-size: 0.9rem;
   }
-  
-  .npa_S {
-    color: #000;
-  }
+
+
+
 }

@@ -17,8 +17,8 @@ margin-top: 0px;
 }
 
 .content-wrapper {
-  width: 90%;
-  max-width: 800px; /* Adjust based on your layout */
+  width: 100%;
+  max-width: 1200px; /* Adjust based on your layout */
  padding-top: 20px;
  
    
@@ -150,10 +150,43 @@ html {
 }
 
 
-@media (max-width: 800px) {
+@media (max-width: 770px) {
   .home-heading{
     margin-left: 54px;
   margin-bottom: 20px;
   }
+  .home-heading{
+    width: 90vw;
+    margin-left: -20px;
+  }
+}
+
+@media (max-width: 470px) {
+  /* Home heading adjustments for mobile */
+  .home-heading {
+    font-size: 2rem;            /* Slightly smaller font size */
+    width: 100vw;               /* Full viewport width */
+    padding: 0 1rem;            /* Some horizontal padding */
+    text-align: center;
+  margin-top: 20px;
+  margin-left: -40px;
+  }
+  
+   
  
+  /* Post cards container adjustments */
+  .post-cards-container-wrapper {
+    padding: 1px;
+    margin-top: 40px;
+    width: 90vw;
+    margin-left: -35px;
+  }
+  
+  /* Individual post card adjustments */
+  .post-card {
+    padding: 10px 15px;         /* Reduced padding */
+    margin: 5px 0;              /* Less vertical margin */
+    border-radius: 10px;        /* Slightly smaller border radius */
+    max-width: 100%;            /* Use full available width */
+  }
 }

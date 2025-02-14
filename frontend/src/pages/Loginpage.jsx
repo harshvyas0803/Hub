@@ -20,7 +20,7 @@ const Loginpage = () => {
     console.log('Login initiated');  // Log 1
   
     try {
-      const response = await axios.post('http://localhost:2005/api/user/login', { email, password });
+      const response = await axios.post(' https://hub-cde3.onrender.com/api/user/login', { email, password });
       console.log('Response:', response.data);  // Debug API response
     
       // Destructure safely

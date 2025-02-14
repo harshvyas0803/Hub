@@ -31,7 +31,7 @@ const RightSidebar = () => {
 
       const fetchUserBlogs = async () => {
         try {
-          const response = await axios.get('http://localhost:2005/api/posts/', {
+          const response = await axios.get(' https://hub-cde3.onrender.com/api/posts/', {
             headers: { Authorization: `Bearer ${user.authToken}` },
           });
           // Filter posts to include only those authored by the logged-in user

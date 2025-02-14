@@ -14,7 +14,7 @@ const Home = () => {
     const fetchPosts = async () => {
       try {
         const token = localStorage.getItem('authToken');
-        const response = await axios.get('http://localhost:2005/api/posts', {
+        const response = await axios.get(' https://hub-cde3.onrender.com/api/posts', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setPosts(response.data);

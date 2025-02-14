@@ -104,7 +104,7 @@ const FetchedCards = ({ posts, defaultExpandSingle }) => {
   const handleDelete = async (postId) => {
     const token = localStorage.getItem("authToken");
     try {
-      await axios.delete(`http://localhost:2005/api/posts/${postId}`, {
+      await axios.delete(` https://hub-cde3.onrender.com/api/posts/${postId}`, {
         headers: { Authorization: token ? `Bearer ${token}` : "" }
       });
       toast.success("Post deleted successfully!");

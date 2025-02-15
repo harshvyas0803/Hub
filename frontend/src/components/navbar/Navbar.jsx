@@ -33,7 +33,8 @@ const Navbar = () => {
     localStorage.removeItem('username');
     setUser(null);
     setToken('');
-    navigate('/');
+   
+    window.location.reload();
   };
 
   // Toggle sidebar visibility when the menu icon is clicked.

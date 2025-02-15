@@ -1,11 +1,12 @@
 /* Overall page styling */
 .create-blog-page {
-    margin-top: 160px;
+    margin-top: 250px;
     background-color: #f5f5f5;
     min-height: 100vh;
     padding-bottom: 2rem;
     width: 800px;
     margin-left: -150px;
+   
  
   }
   
@@ -126,14 +127,15 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-     
     transition: background-color 0.5s ease, border-radius 0.5s ease;
   }
   
+  /* Hover state for the button */
   .create-blog-submit:hover {
     background-color: #555;
     border-radius: 30px;
   }
+  
 
   
   
@@ -168,4 +170,160 @@
 
 .clickable:hover {
   color: #9C59CA;
+}
+/* Add these media queries at the end of your existing CSS */
+
+@media (max-width: 992px) {
+  .create-blog-page {
+    width: 95vw;
+    margin-left: auto;
+    margin-right: auto;
+   height: 100vh;
+    padding: 0 20px;
+  }
+
+  .create-blog-container {
+    margin: 1rem auto;
+    padding: 1.5rem 2rem;
+    border-radius: 30px;
+  }
+
+  .create-blog-container h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .create-blog-page {
+
+    margin-top: 200px;
+    margin-left: 0;
+   width: 95vw;
+    padding: 0 15px;
+    height: 100vh;
+  }
+
+  .create-blog-container {
+    padding: 1.5rem;
+    border-radius: 25px;
+  }
+
+  .create-blog-title,
+  .create-blog-category,
+  .create-blog-content,
+  .create-blog-tags {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+
+  .create-blog-content {
+    min-height: 250px;
+  }
+
+  .create-blog-submit {
+    width: 100%;
+    align-self: center;
+    padding: 0.8rem;
+    border-radius: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .create-blog-container {
+    padding: 1rem;
+    border-radius: 20px;
+  }
+
+  .create-blog-container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .create-blog-title,
+  .create-blog-category,
+  .create-blog-content,
+  .create-blog-tags {
+    border-radius: 15px;
+  }
+
+  .create-blog-content {
+    min-height: 200px;
+    font-size: 0.9rem;
+  }
+
+  .login-cardCB {
+    padding: 1.5rem;
+    margin: 1rem auto;
+    border-radius: 15px;
+  }
+
+  .login-cardCB h2 {
+    font-size: 1.5rem;
+  }
+
+  .login-cardCB p {
+    font-size: 1rem;
+  }
+
+  .clickable {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .create-blog-container h1 {
+    font-size: 1.6rem;
+  }
+
+  .create-blog-title,
+  .create-blog-category {
+    font-size: 0.85rem;
+  }
+
+  .create-blog-content {
+    min-height: 180px;
+  }
+}
+
+/* Submit button styling for larger screens (default) */
+.create-blog-submit {
+  align-self: flex-end;
+  padding: 0.75rem 1.5rem;
+  background-color: #3c3c3c;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease, border-radius 0.5s ease;
+}
+
+/* Hover state for the button */
+.create-blog-submit:hover {
+  background-color: #555;
+  border-radius: 30px;
+}
+
+/* For screens up to 768px */
+@media (max-width: 768px) {
+  .create-blog-submit {
+    padding: 0.65rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* For screens up to 480px */
+@media (max-width: 480px) {
+  .create-blog-submit {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* For very small screens (max-width: 360px) */
+@media (max-width: 360px) {
+  .create-blog-submit {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+  }
 }

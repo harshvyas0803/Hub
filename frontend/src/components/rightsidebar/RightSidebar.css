@@ -3,170 +3,240 @@
 .rightsidebar_ {
   position: fixed;
   right: 0;
-  top: 30px; /* Slight offset from the top */
+  top: 30px;
   height: 80vh;
   width: 280px;
-  /* Reversed gradient: violet at the top, light lavender at the bottom (not pure white) */
-  background: linear-gradient(to bottom, rgba(60, 58, 153, 0.476) 16%, rgba(230, 230, 250, 0.9) 88%);
-  color: #fff;
-  padding: 20px;
+  background: linear-gradient(to bottom, rgba(60, 58, 153, 0.6) 0%, rgba(102, 51, 153, 0.4) 100%);
+  color:rgba(0, 0, 0, 0.703);
+  padding: 25px;
   overflow-y: auto;
-  border-radius: 20px; /* Reduced radius for a sleeker look */
+  border-radius: 20px;
   margin-top: 80px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   margin-right: 30px;
-  backdrop-filter: blur(5px); /* Adds a subtle background blur */
-  /* Add text-shadow so white text remains visible on lighter background */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 200000;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Title styling */
-.rightsidebar_ h3 {
-  font-size: 1.8rem;
-  text-align: center;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #fff;
-  /* More subtle text-shadow for a modern effect */
-  text-shadow: 1px 1px 8px rgba(60, 38, 179, 0.6);
+.rightsidebar_:hover {
+  transform: translateX(-5px);
 }
+ 
 
-/* User details styling */
 .user-details p {
   font-size: 1rem;
-  margin: 8px 0;
-  color: #eee;
-  line-height: 1.4;
+  margin: 10px 0;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
 }
 
-/* Blog titles */
+.user-details p:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.02);
+}
+
 .user-blogs {
-  margin-top: 20px;
+  margin-top: 25px;
+  position: relative;
+}
+
+.user-blogs:before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
 }
 
 .user-blog-title {
-  background: transparent;
-  border: none;
-  border-left: 4px solid rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  margin: 5px 0;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  color: #fff;
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  background: rgba(0, 0, 0, 0.15);
+  border-left: 3px solid #7c4dff;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.user-blog-title:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.5s;
+}
+
+.user-blog-title:hover:before {
+  left: 100%;
 }
 
 .user-blog-title:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateX(5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateX(8px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Additional Animated Gradient Text Effect for Sidebar Elements */
-.rightsidebar_ h3,
-.user-details p,
-.user-blog-title {
+/* Enhanced Text Shine Animation */
+.rightsidebar_ h3 {
   background: linear-gradient(
     to right,
-    #3C26B3 20%,
-    #000000 40%,
-    #9C59CA 60%,
-    #3C26B3 80%
+    #ffffff 20%,
+    #b19cd9 40%,
+    #ffffff 60%,
+    #b19cd9 80%
   );
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-size: 200% auto;
-  animation: textShine 5s ease-in-out infinite alternate;
-  /* Enhanced text-shadow for better clarity */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  animation: textShine 3s linear infinite;
 }
 
-/* Keyframes for the text shine animation */
 @keyframes textShine {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
+  to {
+    background-position: 200% center;
   }
 }
 
-/* Modal Overlay */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-}
 
-/* Modal Content */
-.modal-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
 
-/* Modal Content Heading */
-.modal-content h2 {
-  margin-bottom: 15px;
-}
 
-/* Close Button Styling */
-.modal-content button {
-  background: violet;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
 
-.modal-content button:hover {
-  background: darkviolet;
-}
-
-/* Responsive adjustments for smaller screens */
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .rightsidebar_ {
-    width: 240px;
-    height: 70vh;
-    padding: 15px;
+    width: 260px;
     margin-right: 15px;
+    backdrop-filter: blur(8px);
   }
+  
   .rightsidebar_ h3 {
-    font-size: 1.5rem;
-  }
-  .user-details p,
-  .user-blog-title {
-    font-size: 0.9rem;
+    font-size: 1.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .rightsidebar_ {
-    width: 200px;
-    height: 500px;
-    padding: 10px;
-    margin-right: 10px;
+    width: 85%;
+    right: 50%;
+    transform: translateX(50%);
+    height: auto;
+    max-height: 70vh;
+    margin-top: 20px;
   }
+  
+  .rightsidebar_:hover {
+    transform: translateX(50%) scale(0.98);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rightsidebar_ {
+    width: 260px;
+    margin-right: 15px;
+    backdrop-filter: blur(8px);
+    height: 75vh; /* Better proportional height */
+    top: 20px; /* Adjusted top position */
+  }
+  
   .rightsidebar_ h3 {
-    font-size: 1.3rem;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
   }
-  .user-details p,
+
+  .user-details p {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
   .user-blog-title {
-    font-size: 0.8rem;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .rightsidebar_ {
+    position: fixed;
+    width: 90%;
+    height: auto;
+    max-height: 80vh;
+    left: 5%;
+    right: 5%;
+    top: auto;
+    bottom: 20px;
+    transform: none;
+    margin: 0;
+    z-index: 1000;
+    border-radius: 16px;
+    padding: 20px;
+  }
+
+  .rightsidebar_:hover {
+    transform: none; /* Disable hover effect on mobile */
+  }
+
+  .rightsidebar_ h3 {
+    font-size: 1.6rem;
+    animation: none; /* Disable floating animation on mobile */
+    margin-bottom: 15px;
+  }
+
+  .user-blogs:before {
+    width: 70%; /* Adjust decorative line width */
+  }
+
+  .user-blog-title {
+    margin: 6px 0;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rightsidebar_ {
+    width: 94%;
+    left: 3%;
+    padding: 15px;
+    bottom: 15px;
+    backdrop-filter: blur(6px);
+  }
+
+  .rightsidebar_ h3 {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+  }
+
+  .user-details p {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+
+  .user-blog-title {
+    font-size: 0.85rem;
+    transform: none !important; /* Disable translateX on mobile */
+  }
+
+  .user-blog-title:hover:before {
+    animation: none; /* Disable shine effect on mobile */
+  }
+}
+
+/* Add this for better mobile behavior */
+@media (max-height: 600px) and (max-width: 600px) {
+  .rightsidebar_ {
+    max-height: 65vh;
+    overflow-y: auto;
   }
 }

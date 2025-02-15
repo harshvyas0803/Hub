@@ -5,23 +5,25 @@
   display: flex;
   flex-direction: column; 
   align-items: center; 
- position: fixed;
+
  position: relative;
 height:100vh;
 overflow-y: auto;
 margin-top: 0px;
- width: 95vw;
+ width: 100vw;
  overflow-y:auto;
- background:rgb(255, 0, 0);
+ 
  
 }
 
 .content-wrapper {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: 1200px; /* Adjust based on your layout */
  padding-top: 20px;
- 
-   
+ padding-left: 80px;   
 }
 
 
@@ -39,6 +41,7 @@ margin-top: 0px;
   
 padding-bottom: 3px;
 padding-top: 15px;
+margin: 20px;
 }
 
 
@@ -49,7 +52,8 @@ padding-top: 15px;
   gap: 1rem;
   position: relative;  
   min-height: 200px;
-  margin-top: -30px;
+  margin-top: -50px;
+  overflow-x: hidden;
 }
 
 /* Individual Post Card Styling */
@@ -97,6 +101,7 @@ padding-top: 15px;
  .home-page {
   scrollbar-width:thin; /* Firefox */
   scrollbar-color: #9c59ca #e5e5e5; /* Thumb & Track */
+
   
 }
 
@@ -130,6 +135,7 @@ padding-top: 15px;
 html {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;     /* Firefox */
+ 
 }
 .post-category {
   display: inline-block;
@@ -154,10 +160,10 @@ html {
   .home-heading{
     margin-left: 54px;
   margin-bottom: 20px;
-  }
-  .home-heading{
+
     width: 90vw;
     margin-left: -20px;
+    padding-bottom: 20px;
   }
 }
 
@@ -178,8 +184,9 @@ html {
   .post-cards-container-wrapper {
     padding: 1px;
     margin-top: 40px;
-    width: 90vw;
-    margin-left: -35px;
+  margin-right: 80px;
+ 
+    
   }
   
   /* Individual post card adjustments */
@@ -188,5 +195,149 @@ html {
     margin: 5px 0;              /* Less vertical margin */
     border-radius: 10px;        /* Slightly smaller border radius */
     max-width: 100%;            /* Use full available width */
+    
+  }
+
+  
+
+
+   
+}
+/* Access Denied Styling */
+.access-denied-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(45deg, #3c26b315, #9c59ca15);
+  width: 100vw;
+}
+
+.access-denied-card {
+  position: relative;
+ 
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 500px;
+  width: 90%;
+  animation: cardEntrance 0.6s ease-out;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.denied-title {
+  font-size: 2.2rem;
+  background: linear-gradient(45deg, #3C26B3, #9C59CA);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.denied-message {
+  color: #666;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+.auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-btn {
+  position: relative;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.auth-btn span {
+  position: relative;
+  z-index: 2;
+}
+
+.auth-btn .icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+.login-btn {
+  background: linear-gradient(45deg, #3C26B3, #6a4dff);
+  color: white;
+}
+
+.register-btn {
+  background: linear-gradient(45deg, #9C59CA, #c47cff);
+  color: white;
+}
+
+.auth-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.auth-btn:hover .icon {
+  transform: translateX(3px);
+}
+
+/* Decorative Elements */
+.glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, #3c26b330 0%, transparent 70%);
+  top: -50px;
+  right: -50px;
+  animation: glowMove 8s infinite linear;
+}
+
+@keyframes glowMove {
+  0%, 100% { transform: translate(0,0); }
+  25% { transform: translate(20px,20px); }
+  50% { transform: translate(-20px,20px); }
+  75% { transform: translate(-20px,-20px); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .access-denied-card {
+    padding: 30px;
+  }
+  
+  .denied-title {
+    font-size: 1.8rem;
+  }
+  
+  .auth-btn {
+    padding: 12px 25px;
+    font-size: 0.9rem;
   }
 }

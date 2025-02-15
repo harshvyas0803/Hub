@@ -45,7 +45,7 @@ router.post('/register', async (req, res) => {
 
 // Login Route
   
- // Login Route in authRoutes.js
+  
  // Login Route in authRoutes.js
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;

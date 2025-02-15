@@ -6,6 +6,7 @@
   left: 0;
   top: 100px;
   z-index: 1000;
+  /* margin-left:px; */
 }
 
 /* Toggle Button Styling */
@@ -35,7 +36,7 @@
 
 /* Base Sidebar Styles */
 .sidebar_ {
-  width: 280px;
+  width: 250px;
   height: 75vh;
   background: linear-gradient(11deg, rgba(8, 7, 82, 0.427) 16%, rgba(255, 255, 255, 0.199) 88%);
   color: white;
@@ -149,6 +150,7 @@
     padding: 15px;
     background: #000;
     border-radius: 20px;
+    margin-left: 20px;
    
   }
    
@@ -168,6 +170,8 @@
     font-size: 0.9rem;
   }
 
-
+.sidebar-container{
+  margin-left: 20px;
+}
 
 }

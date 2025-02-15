@@ -3,6 +3,9 @@
 
 *{
     font-family: Signika;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 /* For Chrome, Safari and Opera */
 ::-webkit-scrollbar {

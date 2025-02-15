@@ -3,7 +3,13 @@ import "./FetchedCards.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faThumbsDown, faComment, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { 
+  faThumbsUp, 
+  faThumbsDown, 
+  faComment, 
+  faTrash, 
+  faEdit 
+} from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -29,17 +35,25 @@ const FetchedCards = ({ posts, defaultExpandSingle }) => {
     }
   }, [posts, defaultExpandSingle]);
 
-  const toggleExpand = (postId) => {
+  // Navigate to blog detail page when card is clicked
+  const handleCardClick = (postId) => {
+    navigate(`/blog/${postId}`);
+  };
+
+  // The following interactive events call e.stopPropagation() so that clicking them doesn’t trigger the card-level onClick.
+  const toggleExpand = (e, postId) => {
+    e.stopPropagation();
     setExpandedPost(prev => (prev === postId ? null : postId));
   };
 
-  const handleLike = async (postId) => {
+  const handleLike = async (e, postId) => {
+    e.stopPropagation();
     const token = localStorage.getItem("authToken");
     if (activeIcons[postId] === 'like') return;
     setActiveIcons((prev) => ({ ...prev, [postId]: 'like' }));
     try {
       const response = await axios.post(
-        `http://localhost:2005/api/posts/${postId}/like`,
+        `https://hub-cde3.onrender.com/api/posts/${postId}/like`,
         {},
         {
           headers: { Authorization: token ? `Bearer ${token}` : "" }
@@ -55,13 +69,14 @@ const FetchedCards = ({ posts, defaultExpandSingle }) => {
     }
   };
 
-  const handleDislike = async (postId) => {
+  const handleDislike = async (e, postId) => {
+    e.stopPropagation();
     const token = localStorage.getItem("authToken");
     if (activeIcons[postId] === 'dislike') return;
     setActiveIcons((prev) => ({ ...prev, [postId]: 'dislike' }));
     try {
       const response = await axios.post(
-        `http://localhost:2005/api/posts/${postId}/dislike`,
+        `https://hub-cde3.onrender.com/api/posts/${postId}/dislike`,
         {},
         {
           headers: { Authorization: token ? `Bearer ${token}` : "" }
@@ -76,12 +91,13 @@ const FetchedCards = ({ posts, defaultExpandSingle }) => {
     }
   };
 
-  const handleComment = async (postId, commentText) => {
+  const handleComment = async (e, postId, commentText) => {
+    e.stopPropagation();
     const token = localStorage.getItem("authToken");
     if (!commentText.trim()) return;
     try {
       const response = await axios.post(
-        `http://localhost:2005/api/posts/${postId}/comment`,
+        `https://hub-cde3.onrender.com/api/posts/${postId}/comment`,
         { text: commentText },
         {
           headers: { Authorization: token ? `Bearer ${token}` : "" }
@@ -96,15 +112,17 @@ const FetchedCards = ({ posts, defaultExpandSingle }) => {
     }
   };
 
-  const toggleCommentsVisibility = (postId) => {
+  const toggleCommentsVisibility = (e, postId) => {
+    e.stopPropagation();
     setShowComments(prev => ({ ...prev, [postId]: !prev[postId] }));
     setActiveIcons(prev => ({ ...prev, [postId]: prev[postId] === 'comment' ? null : 'comment' }));
   };
 
-  const handleDelete = async (postId) => {
+  const handleDelete = async (e, postId) => {
+    e.stopPropagation();
     const token = localStorage.getItem("authToken");
     try {
-      await axios.delete(` https://hub-cde3.onrender.com/api/posts/${postId}`, {
+      await axios.delete(`https://hub-cde3.onrender.com/api/posts/${postId}`, {
         headers: { Authorization: token ? `Bearer ${token}` : "" }
       });
       toast.success("Post deleted successfully!");
@@ -154,17 +172,27 @@ const FetchedCards = ({ posts, defaultExpandSingle }) => {
       <div className={`post-cards-container ${!isLoggedIn ? 'blurred' : ''}`}>
         {posts.length > 0 ? (
           posts.map((post) => {
-            const isExpanded = expandedPost === post._id;
             const isLiked = activeIcons[post._id] === 'like';
             const isDisliked = activeIcons[post._id] === 'dislike';
             const isCommentActive = activeIcons[post._id] === 'comment';
             return (
-              <div key={post._id} className={`post-card ${isExpanded ? "expanded" : ""}`} id={post._id}>
-                <div className="post-card-header">
+              <div
+                key={post._id}
+                className={`post-card ${expandedPost === post._id ? "expanded" : ""}`}
+                id={post._id}
+                onClick={() => handleCardClick(post._id)}
+              >
+                <div className="post-card-header" onClick={(e) => e.stopPropagation()}>
                   <div className="header-title-wrapper">
                     <h3 className="post-title">{post.title}</h3>
                     {post.author?.username === loggedInUsername && (
-                      <div className="edit-icon" onClick={() => navigate(`/updateblog/${post._id}`)}>
+                      <div
+                        className="edit-icon"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/updateblog/${post._id}`);
+                        }}
+                      >
                         <FontAwesomeIcon icon={faEdit} />
                       </div>
                     )}
@@ -174,45 +202,45 @@ const FetchedCards = ({ posts, defaultExpandSingle }) => {
                   <p className="post-date">Published on: {new Date(post.createdAt).toLocaleString()}</p>
                 </div>
 
-                <div className={`post-card-content ${isExpanded ? "full-content" : ""}`}>
+                <div className={`post-card-content ${expandedPost === post._id ? "full-content" : ""}`} onClick={(e) => e.stopPropagation()}>
                   <p>{post.content}</p>
                 </div>
 
-                <button className="read-more-btn" onClick={() => toggleExpand(post._id)}>
-                  {isExpanded ? "Read Less" : "Read More"}
+                <button className="read-more-btn" onClick={(e) => toggleExpand(e, post._id)}>
+                  {expandedPost === post._id ? "Read Less" : "Read More"}
                 </button>
 
-                <div className="post-actions">
+                <div className="post-actions" onClick={(e) => e.stopPropagation()}>
                   <div
                     className={`action-icon ${isLiked ? 'active' : ''}`}
-                    onClick={() => handleLike(post._id)}
+                    onClick={(e) => handleLike(e, post._id)}
                   >
                     <FontAwesomeIcon icon={faThumbsUp} />
                     <span>{postLikes[post._id] !== undefined ? postLikes[post._id] : post.likes.length}</span>
                   </div>
                   <div
                     className={`action-icon ${isDisliked ? 'active' : ''}`}
-                    onClick={() => handleDislike(post._id)}
+                    onClick={(e) => handleDislike(e, post._id)}
                   >
                     <FontAwesomeIcon icon={faThumbsDown} />
                     <span>{postDislikes[post._id] !== undefined ? postDislikes[post._id] : post.dislikes.length}</span>
                   </div>
                   <div
                     className={`action-icon ${isCommentActive ? 'active' : ''}`}
-                    onClick={() => toggleCommentsVisibility(post._id)}
+                    onClick={(e) => toggleCommentsVisibility(e, post._id)}
                   >
                     <FontAwesomeIcon icon={faComment} />
                     <span>Comment</span>
                   </div>
                   {post.author?.username === loggedInUsername && (
-                    <div className="action-icon" onClick={() => handleDelete(post._id)}>
+                    <div className="action-icon" onClick={(e) => handleDelete(e, post._id)}>
                       <FontAwesomeIcon icon={faTrash} />
                     </div>
                   )}
                 </div>
 
                 {showComments[post._id] && (
-                  <div className="comment-section">
+                  <div className="comment-section" onClick={(e) => e.stopPropagation()}>
                     <textarea
                       className="comment-input"
                       id={`comment-input-${post._id}`}
@@ -221,10 +249,13 @@ const FetchedCards = ({ posts, defaultExpandSingle }) => {
                     ></textarea>
                     <span
                       className="comment-btn"
-                      onClick={() => handleComment(
-                        post._id,
-                        document.getElementById(`comment-input-${post._id}`).value
-                      )}
+                      onClick={(e) =>
+                        handleComment(
+                          e,
+                          post._id,
+                          document.getElementById(`comment-input-${post._id}`).value
+                        )
+                      }
                     >
                       Comment
                     </span>

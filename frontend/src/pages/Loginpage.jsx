@@ -20,7 +20,7 @@ const Loginpage = () => {
     console.log('Login initiated');  // Log 1
   
     try {
-      const response = await axios.post(' https://hub-cde3.onrender.com/api/user/login', { email, password });
+      const response = await axios.post('https://hub-cde3.onrender.com/api/user/login', { email, password });
       console.log('Response:', response.data);  // Debug API response
     
       // Destructure safely
@@ -35,9 +35,11 @@ const Loginpage = () => {
       
       toast.success('Login Successful!');
       setTimeout(() => navigate('/'), 2000);
-    } catch (error) {
+    } // Update the catch block in handleLogin
+    catch (error) {
       console.error('Login failed:', error);
-      toast.error('Login Failed!');
+      const errorMessage = error.response?.data?.message || 'Login Failed! Check your credentials.';
+      toast.error(errorMessage);
     }
     
   };

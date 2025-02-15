@@ -165,3 +165,37 @@ body {
   
 }
 
+/* Update media queries */
+@media (max-width: 780px) {
+  .register-container {
+    height: auto;
+    padding: 30px;
+    margin-left: 0;
+    width: 90%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 475px) {
+  .register-container {
+    width: 90%;
+    margin-left: 0;
+    height: auto;
+    padding: 25px;
+  }
+  
+  .reg-input {
+    width: 100%;
+  }
+  
+  .password-input-wrapper {
+    width: 100%;
+  }
+  
+  .password-toggle-icon {
+    right: 10px;
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

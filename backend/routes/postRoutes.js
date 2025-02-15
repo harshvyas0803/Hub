@@ -159,7 +159,75 @@ router.get('/:postId', async (req, res) => {
 });
 
 
+router.get('/:postId', async (req, res) => {
+  try {
+    const { postId } = req.params;
 
+    // Validate MongoDB ObjectId format
+    if (!mongoose.Types.ObjectId.isValid(postId)) {
+      return res.status(400).json({ message: 'Invalid post ID format' });
+    }
+
+    // Find the post and populate author and category
+    const post = await Post.findById(postId)
+      .populate('author', 'username email') // Populates the author's username and email
+      .populate('category', 'name'); // Populates category name
+
+    // If post is not found, return 404
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    // Return the found post
+    res.status(200).json(post);
+  } catch (error) {
+    console.error('Error fetching post:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+
+router.put('/:postId', authMiddleware, async (req, res) => {
+  try {
+    const { title, content, category, tags } = req.body;
+
+    // Find the post by ID
+    const post = await Post.findById(req.params.postId);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    // Check if the logged-in user is the author of the post
+    if (post.author.toString() !== req.userId) {
+      return res.status(403).json({ message: 'You are not authorized to update this post' });
+    }
+
+    // Validate and update the category if provided
+    if (category) {
+      if (!mongoose.Types.ObjectId.isValid(category)) {
+        return res.status(400).json({ message: 'Invalid category ID' });
+      }
+      const categoryData = await Category.findById(category);
+      if (!categoryData) {
+        return res.status(400).json({ message: 'Category not found' });
+      }
+      post.category = categoryData._id;
+    }
+
+    // Update the post fields
+    post.title = title || post.title;
+    post.content = content || post.content;
+    if (tags) {
+      post.tags = tags.split(',').map(tag => tag.trim());
+    }
+
+    await post.save();
+    res.status(200).json({ message: 'Post updated successfully', post });
+  } catch (error) {
+    console.error("Error updating post:", error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
 
 
  // routes/posts.js

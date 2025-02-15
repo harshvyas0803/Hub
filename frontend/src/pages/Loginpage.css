@@ -122,6 +122,7 @@ body {
 
 .register-btn {
     color: #3C26B3;
+background: white;
     margin-left: 2px;
 }
 
@@ -163,4 +164,36 @@ body {
   cursor: pointer;
   color: #3C26B3;
   font-size: 1.2rem;
+}
+/* Update media queries */
+@media (max-width: 780px) {
+  .login-container {
+    height: auto;
+    padding: 30px;
+    margin-left: 0;
+    width: 90%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 475px) {
+  .login-container {
+    width: 90%;
+    margin-left: 0;
+    height: auto;
+    padding: 25px;
+  }
+  
+  .input-fieldl {
+    width: 100%;
+  }
+  
+  .password-input-wrapper {
+    width: 100%;
+  }
+  
+  .submit-btn {
+    margin-top: 20px;
+    margin-left: 0;
+  }
 }

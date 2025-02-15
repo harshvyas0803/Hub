@@ -74,7 +74,7 @@ const Registerpage = () => {
     }
     
     try {
-      const response = await axios.post(' https://hub-cde3.onrender.com/api/user/register', { username, email, password });
+      const response = await axios.post('https://hub-cde3.onrender.com/api/user/register', { username, email, password });
       const token = response.data.token;
       localStorage.setItem('authToken', token);
       

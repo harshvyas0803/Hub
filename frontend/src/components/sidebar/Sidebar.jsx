@@ -11,7 +11,7 @@ const Sidebar = ({ onCategorySelect, selectedCategory }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(' https://hub-cde3.onrender.com/api/categories');
+        const response = await axios.get('https://hub-cde3.onrender.com/api/categories');
         // Sort categories alphabetically by name
         const sortedCategories = response.data.sort((a, b) =>
           a.name.localeCompare(b.name)

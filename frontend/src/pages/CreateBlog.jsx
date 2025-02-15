@@ -66,7 +66,7 @@ const CreateBlog = () => {
       const token = localStorage.getItem('authToken');
       console.log('Token from localStorage:', token);
       const response = await axios.post(
-        ' https://hub-cde3.onrender.com/api/posts/create',
+        'https://hub-cde3.onrender.com/api/posts/create',
         postData,
         {
           headers: {

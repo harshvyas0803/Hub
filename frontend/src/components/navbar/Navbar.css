@@ -27,7 +27,7 @@ body {
   align-items: center;
   justify-content: space-between;
   border-radius: 30px;
-  z-index: 1000;
+  z-index: 10000000;
   margin-top: 7px;
 }
 

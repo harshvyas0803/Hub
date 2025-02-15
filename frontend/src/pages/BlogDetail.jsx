@@ -16,7 +16,7 @@ const BlogDetail = () => {
     const fetchBlog = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get(` https://hub-cde3.onrender.com/api/posts/${id}`, {
+        const response = await axios.get(`https://hub-cde3.onrender.com/api/posts/${id}`, {
           headers: { Authorization: token ? `Bearer ${token}` : "" }
         });
         setBlog(response.data);

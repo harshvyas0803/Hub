@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import CreateBlog from './pages/CreateBlog';
@@ -9,13 +9,23 @@ import UpdateBlog from './pages/UpdateBlog';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Inline PublicRoute component: if the user is authenticated, redirect to Home.
-const PublicRoute = ({ children }) => {
-  const authToken = localStorage.getItem('authToken');
+const PublicRoute = ({ children, authToken }) => {
   return authToken ? <Navigate to="/" replace /> : children;
 };
 
 const App = () => {
-  const authToken = localStorage.getItem('authToken');
+  // Use state to track the authentication token.
+  const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
+
+  // Optionally, listen for storage changes (if multiple tabs are used)
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setAuthToken(localStorage.getItem('authToken'));
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   return (
     <div>
@@ -27,7 +37,7 @@ const App = () => {
               <Route path="/createblog" element={<CreateBlog />} />
               <Route path="/blog/:id" element={<BlogDetail />} />
               <Route path="/updateblog/:id" element={<UpdateBlog />} />
-              {/* If logged in, any unknown route redirects to Home */}
+              {/* Redirect any unknown route to Home */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </>
           ) : (
@@ -35,20 +45,20 @@ const App = () => {
               <Route
                 path="/login"
                 element={
-                  <PublicRoute>
-                    <Loginpage />
+                  <PublicRoute authToken={authToken}>
+                    <Loginpage setAuthToken={setAuthToken} />
                   </PublicRoute>
                 }
               />
               <Route
                 path="/register"
                 element={
-                  <PublicRoute>
-                    <Registerpage />
+                  <PublicRoute authToken={authToken}>
+                    <Registerpage setAuthToken={setAuthToken} />
                   </PublicRoute>
                 }
               />
-              {/* If not logged in, any unknown route redirects to Login */}
+              {/* Redirect any unknown route to Login */}
               <Route path="*" element={<Navigate to="/login" replace />} />
             </>
           )}

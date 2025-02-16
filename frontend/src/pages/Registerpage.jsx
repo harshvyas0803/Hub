@@ -8,14 +8,14 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-const Registerpage = () => {
+const Registerpage = ({ setAuthToken }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail]       = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  // Function to validate input fields
+  // Validate input fields before submission
   const validateInputs = () => {
     const errors = {};
 
@@ -77,6 +77,7 @@ const Registerpage = () => {
       const response = await axios.post('https://hub-cde3.onrender.com/api/user/register', { username, email, password });
       const token = response.data.token;
       localStorage.setItem('authToken', token);
+      localStorage.setItem('username', username);
       
       toast.success('Registration Successful!', {
         position: 'top-right',
@@ -86,6 +87,9 @@ const Registerpage = () => {
         pauseOnHover: true,
         draggable: true,
       });
+      
+      // Optionally, update auth token state if needed
+      if (setAuthToken) setAuthToken(token);
       
       setTimeout(() => {
         navigate('/login');
@@ -123,21 +127,20 @@ const Registerpage = () => {
             onChange={(e) => setEmail(e.target.value)}
             className="reg-input"
           />
-           <div className="password-input-wrapper">
-  <input
-    type={showPassword ? "text" : "password"}
-    placeholder="Password"
-    value={password}
-    onChange={(e) => setPassword(e.target.value)}
-    className="reg-input"
-  />
-  <FontAwesomeIcon
-    icon={showPassword ? faEyeSlash : faEye}
-    className="password-toggle-icon"
-    onClick={() => setShowPassword(!showPassword)}
-  />
-</div>
-
+          <div className="password-input-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="reg-input"
+            />
+            <FontAwesomeIcon
+              icon={showPassword ? faEyeSlash : faEye}
+              className="password-toggle-icon"
+              onClick={() => setShowPassword(!showPassword)}
+            />
+          </div>
           <button type="submit" className="reg-submit-btn">Register</button>
         </form>
         <p className="login-prompt">

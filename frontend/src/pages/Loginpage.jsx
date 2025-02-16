@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-const Loginpage = () => {
+const Loginpage = ({ setAuthToken }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -17,31 +17,38 @@ const Loginpage = () => {
   // Handle login on form submission
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('Login initiated');  // Log 1
+    console.log('Login initiated');  // Log for debugging
   
     try {
-      const response = await axios.post('https://hub-cde3.onrender.com/api/user/login', { email, password });
+      const response = await axios.post(
+        'https://hub-cde3.onrender.com/api/user/login', 
+        { email, password }
+      );
       console.log('Response:', response.data);  // Debug API response
     
-      // Destructure safely
+      // Destructure safely from response
       const { token, username, email: userEmail, createdAt } = response.data;
       console.log('Extracted:', { token, username, userEmail, createdAt });
     
+      // Save data to localStorage
       localStorage.setItem('authToken', token);
       localStorage.setItem('username', username);
       localStorage.setItem('email', userEmail);
       localStorage.setItem('createdAt', createdAt);
-      console.log(createdAt)
+      console.log('CreatedAt:', createdAt);
       
       toast.success('Login Successful!');
+      
+      // Update state in App.js via prop
+      if (setAuthToken) setAuthToken(token);
+      
+      // Navigate to home page after a delay
       setTimeout(() => navigate('/'), 2000);
-    } // Update the catch block in handleLogin
-    catch (error) {
+    } catch (error) {
       console.error('Login failed:', error);
       const errorMessage = error.response?.data?.message || 'Login Failed! Check your credentials.';
       toast.error(errorMessage);
     }
-    
   };
 
   return (

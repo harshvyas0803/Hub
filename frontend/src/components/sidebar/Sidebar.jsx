@@ -3,16 +3,16 @@ import './Sidebar.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import Animload from '../../pages/Animload';
 
 const Sidebar = ({ onCategorySelect, selectedCategory }) => {
   const [categories, setCategories] = useState([]);
-  const [isOpen, setIsOpen] = useState(false); // state to control visibility
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get('https://hub-cde3.onrender.com/api/categories');
-        // Sort categories alphabetically by name
         const sortedCategories = response.data.sort((a, b) =>
           a.name.localeCompare(b.name)
         );
@@ -29,6 +29,11 @@ const Sidebar = ({ onCategorySelect, selectedCategory }) => {
     setIsOpen(prev => !prev);
   };
 
+  const handleCategoryClick = (categoryName) => {
+    onCategorySelect(categoryName);
+    setIsOpen(false);
+  };
+
   return (
     <div className="sidebar-container">
       <button className="sidebar-toggle-btn" onClick={toggleSidebar}>
@@ -40,11 +45,10 @@ const Sidebar = ({ onCategorySelect, selectedCategory }) => {
       </button>
       {isOpen && (
         <div className="sidebar_">
-      
           <div className="categories-list">
             <p 
               className={`category-button ${selectedCategory === "" ? "active" : ""}`}
-              onClick={() => onCategorySelect("")}
+              onClick={() => handleCategoryClick("")}
             >
               <span>All</span>
             </p>
@@ -53,13 +57,16 @@ const Sidebar = ({ onCategorySelect, selectedCategory }) => {
                 <p
                   key={category._id}
                   className={`category-button ${selectedCategory === category.name ? "active" : ""}`}
-                  onClick={() => onCategorySelect(category.name)}
+                  onClick={() => handleCategoryClick(category.name)}
                 >
                   <span>{category.name}</span>
                 </p>
               ))
             ) : (
-              <p className="npa_S">No categories available</p>
+              <p className="npa_S">
+                No categories available
+                <Animload/>
+              </p>
             )}
           </div>
         </div>

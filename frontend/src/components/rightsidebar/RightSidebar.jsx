@@ -51,7 +51,8 @@ const RightSidebar = () => {
   if (!user) {
     return (
       <div className="rightsidebar_">
-        <h3>Loading user information...</h3>
+       <Animload/>
+
       </div>
     );
   }

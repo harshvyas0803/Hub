@@ -1,0 +1,18 @@
+/* Toastify Overrides */
+.Toastify__toast-container {
+    z-index: 100000000 !important;
+    position: fixed;
+  }
+  
+  .Toastify__toast {
+    z-index: 100000000 !important;
+    position: relative;
+  }
+  
+  .Toastify__toast-body {
+    z-index: 100000000 !important;
+  }
+  
+  .Toastify__progress-bar {
+    z-index: 100000001 !important;
+  }

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './RightSidebar.css';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import Animload from '../../pages/Animload'
 
 const RightSidebar = () => {
   const [user, setUser] = useState(null);
@@ -77,7 +78,7 @@ const RightSidebar = () => {
             </p>
           ))
         ) : (
-          <p>No blogs yet</p>
+          <Animload/>
         )}
       </div>
     </div>

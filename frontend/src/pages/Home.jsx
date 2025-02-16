@@ -6,13 +6,16 @@ import Sidebar from "../components/sidebar/Sidebar";
 import FetchedCards from "../components/fetchedcards/FetchedCards"; 
 import { Link } from 'react-router-dom';
 import "./Home.css";
+import Animload from "./Animload"
 
 const Home = () => {
+   const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
+
     const fetchPosts = async () => {
       try {
         const token = localStorage.getItem('authToken');
@@ -28,6 +31,17 @@ const Home = () => {
   
     fetchPosts();
   }, []);
+
+
+useEffect(() => {
+
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 5000);
+   
+}, [])
+
+
 
   // Filter posts based on selected category
   const filteredPosts = selectedCategory 
@@ -70,6 +84,11 @@ const Home = () => {
     }
 
   return (
+    
+    <>
+    {isLoading ? <Animload /> : 
+ 
+    
     <div className="home-page">
       <Navbar />
       <Sidebar 
@@ -81,6 +100,9 @@ const Home = () => {
         <FetchedCards posts={filteredPosts} />
       </div>
     </div>
+
+    }
+    </>
   );
 };
 

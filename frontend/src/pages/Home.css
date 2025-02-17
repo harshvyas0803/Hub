@@ -24,6 +24,7 @@ margin-top: 0px;
   max-width: 1200px; /* Adjust based on your layout */
  padding-top: 20px;
  padding-left: 80px;   
+ z-index: 0;
 }
 
 
@@ -178,6 +179,11 @@ html {
   margin-left: -40px;
   }
   
+  .home-page{
+    width: 100vw;
+    overflow-x: hidden;
+ 
+  }
    
  
   /* Post cards container adjustments */

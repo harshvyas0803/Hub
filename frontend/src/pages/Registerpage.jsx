@@ -1,28 +1,24 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Registerpage.css';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-const Registerpage = ({ setAuthToken }) => {
+const Registerpage = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail]       = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  // Validate input fields before submission
   const validateInputs = () => {
     const errors = {};
-
     if (!username.trim()) {
       errors.username = "Username is required.";
     }
-
     if (!email.trim()) {
       errors.email = "Email is required.";
     } else {
@@ -31,7 +27,6 @@ const Registerpage = ({ setAuthToken }) => {
         errors.email = "Please enter a valid email address.";
       }
     }
-
     if (!password.trim()) {
       errors.password = "Password is required.";
     } else {
@@ -51,13 +46,11 @@ const Registerpage = ({ setAuthToken }) => {
         errors.password = "Password must contain at least one special character (@, $, !, %, *, ?, &).";
       }
     }
-
     return errors;
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    
     const errors = validateInputs();
     if (Object.keys(errors).length > 0) {
       Object.values(errors).forEach((errMsg) => {
@@ -74,12 +67,8 @@ const Registerpage = ({ setAuthToken }) => {
     }
     
     try {
-      const response = await axios.post('https://hub-cde3.onrender.com/api/user/register', { username, email, password });
-      const token = response.data.token;
-      localStorage.setItem('authToken', token);
-      localStorage.setItem('username', username);
-      
-      toast.success('Registration Successful!', {
+      await axios.post('https://hub-cde3.onrender.com/api/user/register', { username, email, password });
+      toast.success('Registration Successful! Redirecting to login...', {
         position: 'top-right',
         autoClose: 3000,
         hideProgressBar: false,
@@ -88,12 +77,9 @@ const Registerpage = ({ setAuthToken }) => {
         draggable: true,
       });
       
-      // Optionally, update auth token state if needed
-      if (setAuthToken) setAuthToken(token);
-      
       setTimeout(() => {
         navigate('/login');
-      }, 2000);
+      }, 3000);
     } catch (error) {
       console.error('Registration failed', error);
       toast.error('Registration Failed! Try again.', {

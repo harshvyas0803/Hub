@@ -17,7 +17,7 @@ const App = () => {
   // Use state to track the authentication token.
   const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
 
-  // Optionally, listen for storage changes (if multiple tabs are used)
+ 
   useEffect(() => {
     const handleStorageChange = () => {
       setAuthToken(localStorage.getItem('authToken'));

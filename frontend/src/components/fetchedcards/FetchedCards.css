@@ -343,6 +343,14 @@
 
 /* For very small screens (max-width: 360px) */
 @media (max-width: 360px) {
+  .post-cards-container{
+  width: 100vw;
+align-items: center;
+justify-content: center;
+width: 97vw; 
+overflow-x: hidden;
+margin-left: -30px;
+  }
   .post-card {
     padding: 8px;
   }

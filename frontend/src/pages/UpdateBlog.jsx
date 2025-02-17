@@ -5,10 +5,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../components/navbar/Navbar";
 import Sidebar from "../components/sidebar/Sidebar";
-import "./UpdateBlog.css"; // Create or update this CSS file for styling
+import "./UpdateBlog.css";
 
 const UpdateBlog = () => {
-  const { id } = useParams(); // Get blog ID from URL
+  const { id } = useParams();
   const navigate = useNavigate();
   const [blogData, setBlogData] = useState({
     title: "",
@@ -18,7 +18,6 @@ const UpdateBlog = () => {
   });
   const [categories, setCategories] = useState([]);
 
-  // Fetch blog details to pre-populate the form
   useEffect(() => {
     const fetchBlog = async () => {
       try {
@@ -30,7 +29,7 @@ const UpdateBlog = () => {
         setBlogData({
           title: blog.title,
           content: blog.content,
-          category: blog.category?._id || "",
+          category: blog.category ? blog.category._id : "",
           tags: blog.tags ? blog.tags.join(", ") : ""
         });
       } catch (error) {
@@ -38,16 +37,13 @@ const UpdateBlog = () => {
         toast.error("Error fetching blog details!");
       }
     };
-
     fetchBlog();
   }, [id]);
 
-  // Fetch all categories for the dropdown
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get("http://localhost:2005/api/categories");
-        // Sort categories alphabetically
         const sortedCategories = response.data.sort((a, b) =>
           a.name.localeCompare(b.name)
         );
@@ -56,21 +52,18 @@ const UpdateBlog = () => {
         console.error("Error fetching categories:", error);
       }
     };
-
     fetchCategories();
   }, []);
 
-  // Handle form field changes
   const handleChange = (e) => {
     setBlogData({ ...blogData, [e.target.name]: e.target.value });
   };
 
-  // Handle update submission
   const handleUpdate = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("authToken");
     try {
-      const response = await axios.put(`https://hub-cde3.onrender.com/api/posts/${id}`, blogData, {
+      await axios.put(`https://hub-cde3.onrender.com/api/posts/${id}`, blogData, {
         headers: { Authorization: token ? `Bearer ${token}` : "" }
       });
       toast.success("Blog updated successfully!");

@@ -37,7 +37,7 @@ const CreateBlog = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:2005/api/categories');
+        const response = await axios.get('https://hub-cde3.onrender.com/api/categories');
         console.log('Fetched categories:', response.data);
         const sortedCategories = response.data.sort((a, b) =>
           a.name.localeCompare(b.name)

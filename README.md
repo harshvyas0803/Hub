@@ -24,6 +24,11 @@
 
 Screnshots-
 ![Screenshot](https://raw.githubusercontent.com/harshvyas0803/Hub/main/frontend/assets/scrn1.png)
+![Screenshot](https://raw.githubusercontent.com/harshvyas0803/Hub/main/frontend/assets/scrn2.png)
+![Screenshot](https://raw.githubusercontent.com/harshvyas0803/Hub/main/frontend/assets/scrn3.png)
+![Screenshot](https://raw.githubusercontent.com/harshvyas0803/Hub/main/frontend/assets/scrn4.png)
+![Screenshot](https://raw.githubusercontent.com/harshvyas0803/Hub/main/frontend/assets/scrn5.png)
+
 
 
  

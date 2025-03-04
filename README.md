@@ -1,11 +1,5 @@
 # Hub - A Blog Website
 
-Screnshots-
- <img src="https://raw.githubusercontent.com/harshvyas0803/Hub/main/frontend/assets/scrn2.png" alt="Screenshot 2" width="300" />
-<img src="https://raw.githubusercontent.com/harshvyas0803/Hub/main/frontend/assets/scrn3.png" alt="Screenshot 3" width="300" />
-<img src="https://raw.githubusercontent.com/harshvyas0803/Hub/main/frontend/assets/scrn4.png" alt="Screenshot 4" width="300" />
-<img src="https://raw.githubusercontent.com/harshvyas0803/Hub/main/frontend/assets/scrn5.png" alt="Screenshot 5" width="300" />
-
 
 
 
@@ -30,6 +24,14 @@ Screnshots-
 - **Database:** MongoDB
 
 ---
+
+
+Screnshots-
+ <img src="https://raw.githubusercontent.com/harshvyas0803/Hub/main/frontend/assets/scrn2.png" alt="Screenshot 2" width="300" />
+<img src="https://raw.githubusercontent.com/harshvyas0803/Hub/main/frontend/assets/scrn3.png" alt="Screenshot 3" width="300" />
+<img src="https://raw.githubusercontent.com/harshvyas0803/Hub/main/frontend/assets/scrn4.png" alt="Screenshot 4" width="300" />
+<img src="https://raw.githubusercontent.com/harshvyas0803/Hub/main/frontend/assets/scrn5.png" alt="Screenshot 5" width="300" />
+
 
 
 

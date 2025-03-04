@@ -30,20 +30,8 @@ const Registerpage = () => {
     if (!password.trim()) {
       errors.password = "Password is required.";
     } else {
-      if (password.length < 8) {
-        errors.password = "Password must be at least 8 characters long.";
-      }
-      if (!/[A-Z]/.test(password)) {
-        errors.password = "Password must contain at least one uppercase letter.";
-      }
-      if (!/[a-z]/.test(password)) {
-        errors.password = "Password must contain at least one lowercase letter.";
-      }
-      if (!/[0-9]/.test(password)) {
-        errors.password = "Password must contain at least one number.";
-      }
-      if (!/[@$!%*?&]/.test(password)) {
-        errors.password = "Password must contain at least one special character (@, $, !, %, *, ?, &).";
+      if (password.length < 5) {
+        errors.password = "Password must be at least 5 characters long.";
       }
     }
     return errors;

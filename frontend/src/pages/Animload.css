@@ -1,22 +1,22 @@
-/* Parent container controls the overall loader size and centers content */
+ 
 .parent_animload_ {
  
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Default size for medium screens */
+ 
   width: 20vw;
   height: 20vw;
   margin: 0 auto;
 }
 
-/* Let the Player fill the parent container */
+ 
 .animload-player {
   width: 100%;
   height: 100%;
 }
 
-/* On large screens, reduce the parent's relative size for a balanced look */
+ 
 @media (min-width: 1200px) {
   .parent_animload_ {
     width: 15vw;
@@ -24,7 +24,7 @@
   }
 }
 
-/* On small screens, make the parent container larger relative to the viewport */
+ 
 @media (max-width: 600px) {
   .parent_animload_ {
     width: 40vw;
